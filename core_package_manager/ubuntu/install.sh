@@ -28,6 +28,9 @@ apt install -y --no-install-recommends \
 # ripgrep
 sh additional/install_ripgrep_deb.sh
 
+# bat
+sh additional/install_bat_deb.sh
+
 
 # cleaning
 apt-get clean
