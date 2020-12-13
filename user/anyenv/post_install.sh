@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# execute this script after reload shell.
+# execute this script after setting dotfiles and reloading shell.
 
 # ToDo: Arguments Control
 NODEJS_VERSION=12.20.0
