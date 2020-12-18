@@ -23,4 +23,4 @@ mv terraform ${INSTALL_PATH}/
 rm ${ZIP_FILENAME}
 
 # make synbolic link
-ln -s ${INSTALL_PATH}/terraform ${EXECTIVE_PATH}/terraform
+ln -fs ${INSTALL_PATH}/terraform ${EXECTIVE_PATH}/terraform
