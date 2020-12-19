@@ -8,6 +8,7 @@ install vagrant(Linux)
 
 ## Note
 
+- **RECOMENDATION: install by apt, or dnf**
 - `install.sh` may not work according to the vagrant version
     * try to use package manager such as apt:
 
