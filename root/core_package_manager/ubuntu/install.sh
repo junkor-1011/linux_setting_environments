@@ -23,7 +23,8 @@ apt install -y --no-install-recommends \
     tmux bash zsh fish \
     sudo \
     python3 python3-dev \
-    silversearcher-ag ack
+    silversearcher-ag ack \
+    peco
 
 # ripgrep
 sh additional/install_ripgrep_deb.sh
@@ -33,5 +34,5 @@ sh additional/install_bat_deb.sh
 
 
 # cleaning
-apt-get clean
-rm -rf /var/lib/apt/lists/*
+# apt-get clean
+# rm -rf /var/lib/apt/lists/*
