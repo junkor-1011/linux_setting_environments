@@ -24,4 +24,4 @@ mv vagrant ${INSTALL_PATH}/
 rm ${ZIP_FILENAME}
 
 # make synbolic link
-ln -s ${INSTALL_PATH}/vagrant ${EXECTIVE_PATH}/vagrant
+ln -sfnv ${INSTALL_PATH}/vagrant ${EXECTIVE_PATH}/vagrant
