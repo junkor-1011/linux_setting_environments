@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -eu
 
 # ToDo: Arguments
 VERSION=2.2.14

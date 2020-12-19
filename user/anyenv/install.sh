@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eu
 
 # get script path
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
