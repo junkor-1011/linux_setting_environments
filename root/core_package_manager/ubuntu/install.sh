@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # requirement: ubuntu>=20.04
+set -eu
 
 # ToDo: management extra packages by arguments
 

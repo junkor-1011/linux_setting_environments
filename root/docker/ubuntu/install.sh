@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 # execute by root
+set -eu
 
 # ref(docker): https://docs.docker.com/engine/install/ubuntu/
 # ref(compose): https://docs.docker.com/compose/install/

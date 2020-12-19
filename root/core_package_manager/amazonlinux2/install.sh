@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 # for amazonlinux-2
 # root user execution
+set -eu
 
 # epel
 amazon-linux-extras install epel -y
