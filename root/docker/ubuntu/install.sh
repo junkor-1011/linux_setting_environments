@@ -23,7 +23,7 @@ apt-get -y install \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-apt-key -y fingerprint 0EBFCD88
+apt-key fingerprint 0EBFCD88
 
 # x86_64
 add-apt-repository \
