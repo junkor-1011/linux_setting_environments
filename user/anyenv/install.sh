@@ -9,8 +9,9 @@ cd $SCRIPT_DIR
 if [ ! -d ${HOME}/.anyenv ]; then
     git clone https://github.com/anyenv/anyenv ${HOME}/.anyenv
 else
-    echo "ERROR: anyenv already exists."
-    exit 1
+    # echo "ERROR: anyenv already exists."
+    # exit 1
+    cd ${HOME}/.anyenv; git pull; cd -
 fi
 
 # initialize for setup
@@ -21,8 +22,12 @@ fi
 if [ -d ${HOME}/.config/anyenv/anyenv-init ]; then
     rm -rf ${HOME}/.config/anyenv/anyenv-init
 fi
-git clone https://github.com/anyenv/anyenv-install.git ${HOME}/.config/anyenv/anyenv-install
-anyenv install --init
+if [ ! -d ${HOME}/.config/anyenv/anyenv-install ]; then
+    git clone https://github.com/anyenv/anyenv-install.git ${HOME}/.config/anyenv/anyenv-install
+else
+    cd ${HOME}/.config/anyenv/anyenv-install; git pull; cd -
+fi
+# anyenv install --init
 eval "$(anyenv init -)"
 
 # install anyenv plugins
