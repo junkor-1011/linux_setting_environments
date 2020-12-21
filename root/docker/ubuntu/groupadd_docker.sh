@@ -4,7 +4,9 @@ set -eu
 
 TARGET=${1:-vagrant}
 
+set +e
 groupadd docker
+set -e
 
 gpasswd -a $TARGET docker
 
