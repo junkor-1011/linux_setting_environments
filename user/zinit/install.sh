@@ -12,15 +12,12 @@ curl -L https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh -o
 
 # install
 expect -c "
-spawn
+  spawn /bin/sh ${SCRIPT_DIR}/__install__.sh
+  expect \"▓▒░ Enter y/n and press Return:\"
+  send \"n\x0a\"
 "
 
 # rm trash
 rm __install__.sh
-expect -c "
-  spawn /bin/sh __install__.sh
-  expect \"▓▒░ Enter y/n and press Return:\"
-  send \"n\x0a\"
-"
-echo "Done"
 
+echo "Done"
