@@ -14,6 +14,7 @@ apt install -y --no-install-recommends \
     build-essential \
     zip unzip bzip2 \
     p7zip-full unrar \
+    nkf dos2unix \
     openssl libssl-dev \
     curl wget file \
     git \
@@ -25,7 +26,9 @@ apt install -y --no-install-recommends \
     sudo \
     python3 python3-dev \
     silversearcher-ag ack \
-    peco
+    peco \
+    global exuberant-ctags \
+    xclip
 
 # ripgrep
 sh additional/install_ripgrep_deb.sh
