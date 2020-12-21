@@ -6,7 +6,8 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
 # ToDo: Arguments
-VERSION=v0.4.4
+# VERSION=v0.4.4
+VERSION=stable
 OS=linux64
 INSTALL_PATH=${HOME}/LocalApps
 EXECTIVE_PATH=${HOME}/bin
