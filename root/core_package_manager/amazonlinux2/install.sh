@@ -24,7 +24,7 @@ yum install -y \
     tree \
     jq \
     net-tools \
-    openssl openssl-devel \
+    autossh openssl openssl-devel \
     tmux bash zsh fish \
     ruby \
     python3 python3-devel \

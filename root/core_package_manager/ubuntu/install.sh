@@ -19,7 +19,7 @@ apt-get install -y --no-install-recommends \
     tree \
     jq \
     net-tools \
-    openssl libssl-dev \
+    autossh openssl libssl-dev \
     curl wget file \
     git tig subversion \
     ca-certificates \
