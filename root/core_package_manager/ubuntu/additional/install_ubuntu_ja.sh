@@ -45,3 +45,5 @@ cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime   # This sets the time
 
 # set timezone interactive:
 # sudo dpkg-reconfigure tzdata
+
+echo "Finished: japanese setting"
