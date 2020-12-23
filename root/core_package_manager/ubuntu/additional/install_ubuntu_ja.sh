@@ -9,7 +9,7 @@ apt install -y \
 
 # ubuntu-defaults-ja
 UBUNTU_VERSION=$(. /etc/lsb-release; echo $DISTRIB_RELEASE)
-UBUNTU_CODENAME=$(. /etc/lsb-release; echo $DISTIB_CODENAME)
+UBUNTU_CODENAME=$(. /etc/lsb-release; echo $DISTRIB_CODENAME)
 if [ $UBUNTU_VERSION = "20.10" ]; then
     echo $UBUNTU_CODENAME
     wget https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -P /etc/apt/trusted.gpg.d/
@@ -25,6 +25,8 @@ else if [ $UBUNTU_VERSION = "18.04" ]; then
     wget -q https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg -O- | apt-key add -
     wget -q https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -O- | apt-key add -
     wget https://www.ubuntulinux.jp/sources.list.d/bionic.list -O /etc/apt/sources.list.d/ubuntu-ja.list
+else
+    :
 fi
 apt-get -y update
 apt-get -y upgrade
