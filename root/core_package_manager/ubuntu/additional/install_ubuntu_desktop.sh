@@ -12,4 +12,5 @@ apt-get -y install gnome-tweak-tool
 # remote-desktop
 apt-get -y install \
     xrdp \
-    remmina
+    remmina \
+    rdesktop
