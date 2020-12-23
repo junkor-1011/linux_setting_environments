@@ -23,6 +23,7 @@ yum install -y \
     nkf dos2unix \
     tree \
     jq \
+    vim emacs \
     net-tools \
     autossh openssl openssl-devel \
     tmux bash zsh fish \

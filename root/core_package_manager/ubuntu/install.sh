@@ -18,6 +18,7 @@ apt-get install -y --no-install-recommends \
     nkf dos2unix \
     tree \
     jq \
+    vim emacs \
     net-tools \
     autossh openssl libssl-dev \
     curl wget file \
