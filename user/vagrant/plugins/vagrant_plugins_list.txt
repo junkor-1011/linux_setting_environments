@@ -1,0 +1,5 @@
+vagrant-omnibus
+vagrant-vbguest
+sahara
+vagrant-vbox-snapshot
+vagrant-hostupdater

@@ -23,8 +23,9 @@ yum install -y \
     nkf dos2unix \
     tree \
     jq \
+    vim emacs \
     net-tools \
-    openssl openssl-devel \
+    autossh openssl openssl-devel \
     tmux bash zsh fish \
     ruby \
     python3 python3-devel \
