@@ -46,4 +46,10 @@ cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime   # This sets the time
 # set timezone interactive:
 # sudo dpkg-reconfigure tzdata
 
+# keyboard layout
+# setxkbmap -layout jp  # <= execute in local user
+
+# (c.f.)
+# dpkg-reconfigure keyboard-configuration
+
 echo "Finished: japanese setting"
