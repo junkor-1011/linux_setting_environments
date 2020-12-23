@@ -1,0 +1,2 @@
+vagrant-ip-show
+vagrant-aws
