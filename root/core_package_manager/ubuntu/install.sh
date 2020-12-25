@@ -25,6 +25,7 @@ apt-get install -y --no-install-recommends \
     git tig subversion \
     ca-certificates \
     fontconfig \
+    fonts-ipafont \
     locales \
     expect \
     tmux bash zsh fish \
