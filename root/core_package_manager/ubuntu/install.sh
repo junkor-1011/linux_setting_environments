@@ -25,12 +25,13 @@ apt-get install -y --no-install-recommends \
     git tig subversion \
     ca-certificates \
     fontconfig \
+    fonts-ipafont \
     locales \
     expect \
     tmux bash zsh fish \
     sudo \
     ruby \
-    python3 python3-dev \
+    python3 python3-dev python3-venv \
     silversearcher-ag ack \
     peco \
     global exuberant-ctags \
