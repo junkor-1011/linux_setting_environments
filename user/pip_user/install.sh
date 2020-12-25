@@ -9,4 +9,6 @@ if [ ! -x /usr/bin/python3 ]; then
 fi
 
 # install
-/usr/bin/python3 -m pip install -r ${SCRIPT_DIR}/requirements.txt --user --no-cache
+/usr/bin/python3 -m pip install -r ${SCRIPT_DIR}/requirements.txt --user --no-cache-dir -U
+
+echo "INFO: finished."
