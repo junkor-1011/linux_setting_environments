@@ -31,7 +31,7 @@ apt-get install -y --no-install-recommends \
     tmux bash zsh fish \
     sudo \
     ruby \
-    python3 python3-dev python3-venv \
+    python3 python3-dev python3-pip python3-venv \
     silversearcher-ag ack \
     peco \
     global exuberant-ctags \
