@@ -1,0 +1,5 @@
+# pip user install requirement packages
+pynvim
+pipenv
+poetry
+# python-language-server
