@@ -18,7 +18,7 @@ sudo dpkg-reconfigure keyboard-configuration
 gnome-session-properties
 
 # add command:
-setxkbmap jp
+setxkbmap -layout jp
 ```
 
 ### 1-3. Keymap
