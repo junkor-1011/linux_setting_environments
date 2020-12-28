@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
-set -eu
+set -eux
 
 # ToDo: Arguments
-VERSION=0.14.0
+VERSION=0.14.3
 OS=linux
 CPU_TYPE=amd64
 INSTALL_PATH=${HOME}/LocalApps/terraform_${VERSION}
@@ -24,4 +24,4 @@ mv terraform ${INSTALL_PATH}/
 rm ${ZIP_FILENAME}
 
 # make synbolic link
-ln -fs ${INSTALL_PATH}/terraform ${EXECTIVE_PATH}/terraform
+ln -sfnv ${INSTALL_PATH}/terraform ${EXECTIVE_PATH}/terraform
