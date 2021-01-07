@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -eux
 
 # ToDo: improve
 USING_SHELL=${1:-zsh}
