@@ -2,7 +2,8 @@
 # execute this script after setting dotfiles and reloading shell.
 
 # ToDo: Arguments Control
-NODEJS_VERSION=12.20.0
+# NODEJS_VERSION=12.20.1
+NODEJS_VERSION=14.15.4
 
 # pyenv
 
