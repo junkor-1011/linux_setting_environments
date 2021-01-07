@@ -35,7 +35,7 @@ apt-get install -y --no-install-recommends \
     silversearcher-ag ack \
     peco \
     global exuberant-ctags \
-    xclip \
+    xclip x11-apps mesa-utils-extra \
     pandoc
 apt-get -y upgrade
 apt-get -y autoremove
