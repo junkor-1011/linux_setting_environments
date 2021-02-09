@@ -23,6 +23,7 @@ apt-get install -y --no-install-recommends \
     autossh openssl libssl-dev \
     curl wget file \
     git tig subversion \
+    git-flow \
     ca-certificates \
     fontconfig \
     fonts-ipafont \
