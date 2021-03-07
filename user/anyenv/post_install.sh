@@ -24,4 +24,4 @@ nodenv global ${NODEJS_VERSION}
 npm i -g neovim htmlhint
 npm i -g eslint eslint_d prettier stylelint eslint-config-prettier eslint-plugin-prettier prettier-eslint-cli
 npm i -g typescript typescript-language-server
-npm i -g create-react-app
+# npm i -g create-react-app
