@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eux
+
+# get script path
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
+# ToDo: Auguments or Config
+VERSION=1.16.3
+OS=linux
+ARCH=amd64
+PACKAGE_TGZ=go${VERSION}.${OS}-${ARCH}.tar.gz
+INSTALL_PATH=/usr/local
+
+# Download binary package
+curl -LO https://golang.org/dl/${PACKAGE_TGZ}
+
+# install (and if exists, remove previous version at /usr/local/go)
+rm -rf ${INSTALL_PATH}/go
+tar -C ${INSTALL_PATH} -xzf ${PACKAGE_TGZ}
+
+# rm package tar.gz file
+rm ${PACKAGE_TGZ}
