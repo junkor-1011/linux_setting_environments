@@ -1,11 +1,9 @@
 #!/usr/bin/env sh
-set -eu
+set -eux
 
 # get script path
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
-
-echo WARNING: install.sh is deprecated
 
 # ToDo: Arguments
 VERSION=v0.18.0
@@ -27,6 +25,11 @@ tar zxvf ${BAT_PACKAGE}.tar.gz     # inflate
 if [ ! -d ${INSTALL_PATH} ]; then
     mkdir -p ${INSTALL_PATH}
 fi
+
+if [ -d ${INSTALL_PATH}/${BAT_PACKAGE} ];then
+    rm -rf ${INSTALL_PATH}/${BAT_PACKAGE}
+fi
+
 mv ${BAT_PACKAGE} -t ${INSTALL_PATH}
 
 # remove trash
