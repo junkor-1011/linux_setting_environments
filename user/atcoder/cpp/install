@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eux
+
+INSTALL_PATH=${HOME}/LocalApps/atcoder/cpp/include/bits
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd ${SCRIPT_DIR}
+
+if [ ! -d ${INSTALL_PATH} ]; then
+    mkdir -p ${INSTALL_PATH}
+fi
+
+cp stdc++.h ${INSTALL_PATH}/stdc++.h
