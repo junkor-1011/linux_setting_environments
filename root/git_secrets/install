@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -eux
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
+# install
+git clone https://github.com/awslabs/git-secrets.git --depth 1
+cd git-secrets
+make install
+
+# cleanup
+cd ..
+rm -rf git-secrets
