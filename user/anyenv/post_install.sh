@@ -2,8 +2,7 @@
 # execute this script after setting dotfiles and reloading shell.
 
 # ToDo: Arguments Control
-# NODEJS_VERSION=12.20.1
-NODEJS_VERSION=14.16.0
+NODEJS_VERSION=14.17.6
 
 # pyenv
 
@@ -24,4 +23,6 @@ nodenv global ${NODEJS_VERSION}
 npm i -g neovim htmlhint
 npm i -g eslint eslint_d prettier stylelint eslint-config-prettier eslint-plugin-prettier prettier-eslint-cli
 npm i -g typescript typescript-language-server
+npm i -g yarn
+npm i -g serve
 # npm i -g create-react-app

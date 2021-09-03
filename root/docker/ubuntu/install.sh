@@ -9,7 +9,7 @@ set -eu
 # sudo apt-get remove docker docker-engine docker.io containerd runc
 
 # compose version
-VERSION_COMPOSE=1.27.4
+VERSION_COMPOSE=1.29.2
 
 # setup the repository
 apt-get update
