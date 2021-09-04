@@ -6,7 +6,7 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
 # ToDo: Arguments
-VERSION=v0.18.0
+VERSION=v0.18.3
 OS=linux
 CPU_TYPE=x86_64
 BUILD_TYPE=musl
