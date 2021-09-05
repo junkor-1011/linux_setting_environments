@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+set -eux
+
+# get script path
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
+# ToDo: Arguments
+VERSION=v0.0.4
+OS=linux
+CPU_TYPE=x64
+# or gnu
+INSTALL_PATH=${HOME}/LocalApps
+EXECTIVE_PATH=${HOME}/bin
+
+PACKAGE_ZIP="win32yank-${CPU_TYPE}.zip"
+PACKAGE="win32yank.exe"
+DOWNLOAD_URL=https://github.com/equalsraf/win32yank/releases/download/${VERSION}/${PACKAGE_ZIP}
+
+# download
+WORK_DIR="__TMP__"
+mkdir ${WORK_DIR}
+cd ${WORK_DIR}
+curl -LO ${DOWNLOAD_URL}
+
+# install
+unzip ${PACKAGE_ZIP}    # inflate
+chmod +x ${PACKAGE}
+if [ ! -d ${INSTALL_PATH} ]; then
+    mkdir -p ${INSTALL_PATH}
+fi
+
+if [ -x ${INSTALL_PATH}/${PACKAGE} ];then
+    rm ${INSTALL_PATH}/${PACKAGE}
+fi
+
+mv ${PACKAGE} ${INSTALL_PATH}
+
+# remove trash
+cd ..
+rm -rf ${WORK_DIR}
+
+# make synbolic link
+ln -sfv ${INSTALL_PATH}/${PACKAGE} ${EXECTIVE_PATH}/${PACKAGE}
