@@ -8,7 +8,7 @@ cd $SCRIPT_DIR
 
 # download
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-curl -L https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh -o __install__.sh
+curl -L https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh -o __install__.sh
 
 # install
 expect -c "
