@@ -1,0 +1,38 @@
+ServerAliveInterval 60
+
+# GitHub
+Host github.com
+  PreferredAuthentications publickey
+  Port 22
+  IdentityFile ~/.ssh/<key of GitHub>
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+  User git
+
+# BitBucket
+Host bitbucket.org
+  PreferredAuthentications publickey
+  Port 22
+  IdentityFile ~/.ssh/<key of BitBucket>
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+  User git
+
+# GitLab
+Host gitlab.com
+  PreferredAuthentications publickey
+  Port 22
+  IdentityFile ~/.ssh/<key of GitLab>
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+  User git
+
+# ssh example
+# Host <Host Alias>
+#   HostName <HostName or IP address>
+#   User <username>
+#   Port <port number>
+#   IdentityFile <secret key path>
+#   ServerAliveInterval 60
+#   ForwardX11 yes
+#   Compression yes
