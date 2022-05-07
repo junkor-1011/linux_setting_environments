@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+set -eu
+
+# get script path
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
+# install dir
+INSTALL_PATH=${HOME}/LocalApps/git-secrets
+EXECUTIVE_PATH=${HOME}/bin
+
+# set env
+export PREFIX=${INSTALL_PATH}
+
+# download
+if [ -d tmp ]; then
+    rm -rf tmp
+fi
+git clone https://github.com/awslabs/git-secrets --depth 1 tmp
+
+# install
+cd tmp
+make install
+
+# make synbolic link
+if [ ! -d ${EXECUTIVE_PATH} ]; then
+    mkdir -p ${EXECUTIVE_PATH}
+fi
+ln -snfv ${INSTALL_PATH}/bin/git-secrets ${EXECUTIVE_PATH}/git-secrets
+
+# cleanup
+cd ..
+rm -rf tmp
