@@ -30,6 +30,7 @@ apt-get install -y --no-install-recommends \
     locales \
     expect \
     tmux bash zsh fish \
+    shellcheck \
     sudo \
     ruby \
     python3 python3-dev python3-pip python3-venv \
