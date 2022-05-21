@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 set -eu
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
 # ToDo: Arguments
-VERSION=2.2.14
+VERSION=2.2.19
 OS=linux
 CPU_TYPE=amd64
 INSTALL_PATH=${HOME}/LocalApps/vagrant_${VERSION}
