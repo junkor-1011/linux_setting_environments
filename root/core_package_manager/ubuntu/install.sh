@@ -38,7 +38,8 @@ apt-get install -y --no-install-recommends \
     peco \
     global exuberant-ctags \
     xclip x11-apps mesa-utils-extra \
-    pandoc
+    pandoc \
+    libfuse2
 apt-get -y upgrade
 apt-get -y autoremove
 
