@@ -2,4 +2,5 @@
 pynvim
 pipenv
 poetry
+pre-commit
 # python-language-server
