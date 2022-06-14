@@ -36,7 +36,7 @@ apt-get install -y --no-install-recommends \
     python3 python3-dev python3-pip python3-venv \
     silversearcher-ag ack \
     peco \
-    exa \
+    exa hexyl fd-find \
     global exuberant-ctags \
     xclip x11-apps mesa-utils-extra \
     pandoc \
