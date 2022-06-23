@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+# get script path
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
+
+VERSION="v2.10.0"
+OS=Linux
+CPU_ARCH="x86_64"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+DOWNLOAD_URL="https://github.com/hadolint/hadolint/releases/download/${VERSION}/hadolint-${OS}-${CPU_ARCH}"
+
+WORK_DIR="__TMP__"
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -L "${DOWNLOAD_URL}" -o hadolint
+chmod +x hadolint
+mv hadolint "${INSTALL_PATH}/hadolint"
+ln -sfv "${INSTALL_PATH}/hadolint" "${EXECTIVE_PATH}/hadolint"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
