@@ -6,12 +6,14 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
 # ToDo: Auguments or Config
-VERSION=1.18.2
+VERSION=1.18.3
 OS=linux
 ARCH=amd64
 PACKAGE_TGZ=go${VERSION}.${OS}-${ARCH}.tar.gz
 INSTALL_PATH=${HOME}/LocalApps
 EXECUTE_PATH=${HOME}/bin
+
+echo "Let's Install Go ver: ${VERSION}, please check if there is newer version."
 
 # Download binary package
 curl -LO https://golang.org/dl/${PACKAGE_TGZ}
