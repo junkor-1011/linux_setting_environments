@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+set -eu
+
+# get script path
+SCRIPT_DIR="$(
+	cd "$(dirname "$0")"
+	pwd
+)"
+cd "$SCRIPT_DIR"
+
+VERSION="v3.5.1"
+OS=linux
+CPU_ARCH="amd64"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_${OS}_${CPU_ARCH}"
+
+echo "Let's Install shfmt ver: ${VERSION}, please check if there is newer version."
+
+WORK_DIR="__TMP__"
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -L "${DOWNLOAD_URL}" -o shfmt
+chmod +x shfmt
+mv shfmt "${INSTALL_PATH}/shfmt"
+ln -sfv "${INSTALL_PATH}/shfmt" "${EXECTIVE_PATH}/shfmt"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
