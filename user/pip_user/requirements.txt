@@ -3,4 +3,5 @@ pynvim
 pipenv
 poetry
 pre-commit
+yamllint
 # python-language-server
