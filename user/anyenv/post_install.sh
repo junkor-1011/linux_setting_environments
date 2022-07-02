@@ -3,7 +3,7 @@
 
 # ToDo: Arguments Control
 # NODEJS_VERSION=14.17.6
-NODEJS_VERSION=16.15.0
+NODEJS_VERSION=16.15.1
 
 # pyenv
 
@@ -24,7 +24,7 @@ pyenv install mambaforge
 # node setting
 nodenv install ${NODEJS_VERSION}
 nodenv global ${NODEJS_VERSION}
-npm i -g yarn
+npm i -g yarn pnpm
 npm i -g serve
 npm i -g neovim
 # npm i -g htmlhint eslint eslint_d prettier stylelint eslint-config-prettier eslint-plugin-prettier prettier-eslint-cli
