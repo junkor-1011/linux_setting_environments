@@ -4,7 +4,8 @@ set -eu
 npm install --location=global \
     yarn pnpm \
     neovim \
+    serve \
     zx \
     typescript typescript-language-server eslint-language-server \
     prettier fixjson \
-    markdownlint
+    markdownlint markdownlint-cli
