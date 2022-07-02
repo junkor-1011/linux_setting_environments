@@ -4,4 +4,5 @@ pipenv
 poetry
 pre-commit
 yamllint
+restructuredtext_lint
 # python-language-server
