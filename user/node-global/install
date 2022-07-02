@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+npm install --location=global \
+    yarn pnpm \
+    neovim \
+    zx \
+    typescript typescript-language-server eslint-language-server \
+    prettier fixjson \
+    markdownlint
