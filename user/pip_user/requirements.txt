@@ -6,4 +6,5 @@ pre-commit
 yamllint
 restructuredtext_lint
 pandoc
+vim-vint
 # python-language-server
