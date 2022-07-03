@@ -5,7 +5,7 @@ set -eu
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"
 
-VERSION="0.4.5"
+VERSION="$(curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
 OS=Linux
 CPU_ARCH="64bit"
 
