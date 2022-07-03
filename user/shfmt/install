@@ -8,7 +8,8 @@ SCRIPT_DIR="$(
 )"
 cd "$SCRIPT_DIR"
 
-VERSION="v3.5.1"
+VERSION="$(curl --silent "https://api.github.com/repos/mvdan/sh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
+VERSION="v${VERSION}"
 OS=linux
 CPU_ARCH="amd64"
 
