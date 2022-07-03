@@ -2,11 +2,11 @@
 set -eux
 
 # get script path
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
-cd $SCRIPT_DIR
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
 
 # ToDo: Arguments
-VERSION=v0.21.0
+VERSION="$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')"
 OS=linux
 CPU_TYPE=x86_64
 BUILD_TYPE=musl
@@ -15,25 +15,27 @@ INSTALL_PATH=${HOME}/LocalApps
 EXECTIVE_PATH=${HOME}/bin
 
 BAT_PACKAGE="bat-${VERSION}-${CPU_TYPE}-unknown-${OS}-${BUILD_TYPE}"
-DOWNLOAD_URL=https://github.com/sharkdp/bat/releases/download/${VERSION}/${BAT_PACKAGE}.tar.gz
+DOWNLOAD_URL="https://github.com/sharkdp/bat/releases/download/${VERSION}/${BAT_PACKAGE}.tar.gz"
 
 # download
-curl -LO ${DOWNLOAD_URL}
+curl -LO "${DOWNLOAD_URL}"
 
 # install
-tar zxvf ${BAT_PACKAGE}.tar.gz     # inflate
-if [ ! -d ${INSTALL_PATH} ]; then
-    mkdir -p ${INSTALL_PATH}
+tar zxvf "${BAT_PACKAGE}.tar.gz"     # inflate
+if [ ! -d "${INSTALL_PATH}" ]; then
+    mkdir -p "${INSTALL_PATH}"
 fi
 
-if [ -d ${INSTALL_PATH}/${BAT_PACKAGE} ];then
-    rm -rf ${INSTALL_PATH}/${BAT_PACKAGE}
+if [ -d "${INSTALL_PATH}/${BAT_PACKAGE}" ];then
+    rm -rf "${INSTALL_PATH}/${BAT_PACKAGE}"
 fi
 
-mv ${BAT_PACKAGE} -t ${INSTALL_PATH}
+mv "${BAT_PACKAGE}" -t "${INSTALL_PATH}"
 
 # remove trash
-rm ${BAT_PACKAGE}.tar.gz
+rm "${BAT_PACKAGE}.tar.gz"
 
 # make synbolic link
-ln -sfv ${INSTALL_PATH}/${BAT_PACKAGE}/bat ${EXECTIVE_PATH}/bat
+ln -sfv "${INSTALL_PATH}/${BAT_PACKAGE}/bat" "${EXECTIVE_PATH}/bat"
+
+echo "bat version: ${VERSION} has been installed."
