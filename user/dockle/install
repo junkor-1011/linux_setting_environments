@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+set -eu
+
+# get script path
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
+
+VERSION="0.4.5"
+OS=Linux
+CPU_ARCH="64bit"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+TGZ_FILENAME="dockle_${VERSION}_${OS}-${CPU_ARCH}.tar.gz"
+DOWNLOAD_URL="https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/${TGZ_FILENAME}"
+
+WORK_DIR="__TMP__"
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -LO "${DOWNLOAD_URL}"
+tar xzvf ${TGZ_FILENAME}
+mv dockle "${INSTALL_PATH}/dockle"
+ln -sfv "${INSTALL_PATH}/dockle" "${EXECTIVE_PATH}/dockle"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
+
+echo "dockle v${VERSION} has been installed."
+echo "(Please check update by yourself.)"
