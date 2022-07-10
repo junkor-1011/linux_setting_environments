@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 set -eu
 
-npm install --location=global \
-    yarn pnpm \
+corepack enable npm yarn pnpm
+npm install --global \
     neovim \
     serve \
     zx \
