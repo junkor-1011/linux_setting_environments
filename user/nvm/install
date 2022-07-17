@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+VERSION=$(curl --silent "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+
+echo "Let's install nvm version: ${VERSION}"
+
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${VERSION}/install.sh" | bash
