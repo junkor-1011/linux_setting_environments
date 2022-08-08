@@ -20,6 +20,7 @@ apt-get install -y --no-install-recommends \
     jq \
     vim emacs \
     net-tools \
+    whois \
     autossh openssl libssl-dev \
     curl wget file \
     git tig subversion \
