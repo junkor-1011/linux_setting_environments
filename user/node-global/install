@@ -10,6 +10,6 @@ npm install --global \
     neovim \
     serve \
     zx \
-    typescript typescript-language-server eslint-language-server \
+    typescript typescript-language-server \
     prettier fixjson \
     markdownlint markdownlint-cli
