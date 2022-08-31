@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -eu
+
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "${SCRIPT_DIR}"
+
+# cleanup
+if [ -d pipr ]; then
+    rm -rf pipr
+fi
+
+BUILD_DIR="pipr-build"
+
+git clone https://github.com/elkowar/pipr.git "${BUILD_DIR}" --depth 1
+cd "${BUILD_DIR}"
+# build
+./build_docker.sh
+
+cd ..
+cp "${BUILD_DIR}/target/x86_64-unknown-linux-musl/release/pipr" .

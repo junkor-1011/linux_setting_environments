@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eu
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "${SCRIPT_DIR}"
+
+# build
+./build
+
+
+# cp
+cp pipr "${INSTALL_PATH}/pipr"
+
+# make link
+ln -sfv "${INSTALL_PATH}/pipr" "${EXECTIVE_PATH}/pipr"
+
+echo "pipr has been installed."
+echo "(Please check update by yourself.)"

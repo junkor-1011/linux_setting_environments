@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+set -eu
+
+# get script path
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
+
+VERSION="$(curl --silent "https://api.github.com/repos/elkowar/pipr/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
+# OS=Linux
+# CPU_ARCH="64bit"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+# TGZ_FILENAME="trivy_${VERSION}_${OS}-${CPU_ARCH}.tar.gz"
+DOWNLOAD_URL="https://github.com/elkowar/pipr/releases/download/${VERSION}/pipr"
+
+WORK_DIR="__TMP__"
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -LO "${DOWNLOAD_URL}"
+# tar xzvf ${TGZ_FILENAME}
+chmod +x pipr
+mv pipr "${INSTALL_PATH}/pipr"
+ln -sfv "${INSTALL_PATH}/pipr" "${EXECTIVE_PATH}/pipr"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
+
+echo "pipr v${VERSION} has been installed."
+echo "(Please check update by yourself.)"
