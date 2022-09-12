@@ -2,9 +2,9 @@
 set -eu
 
 corepack enable npm yarn pnpm
-corepack prepare npm@8.18.0 --activate
+corepack prepare npm@8.19.1 --activate
 corepack prepare yarn@1.22.19 --activate
-corepack prepare pnpm@7.9.5 --activate
+corepack prepare pnpm@7.11.0 --activate
 
 npm install --global \
     neovim \
