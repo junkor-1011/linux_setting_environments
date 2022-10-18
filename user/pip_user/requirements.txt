@@ -7,4 +7,5 @@ yamllint
 restructuredtext_lint
 pandoc
 vim-vint
+yq
 # python-language-server
