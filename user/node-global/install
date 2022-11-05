@@ -4,7 +4,7 @@ set -eu
 corepack enable npm yarn pnpm
 corepack prepare npm@8.19.2 --activate
 corepack prepare yarn@1.22.19 --activate
-corepack prepare pnpm@7.14.1 --activate
+corepack prepare pnpm@7.14.2 --activate
 
 npm install --global \
     tsx \
