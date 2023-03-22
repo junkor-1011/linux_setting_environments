@@ -34,6 +34,9 @@ RUN dnf update -y && \
 RUN useradd -m -s /bin/bash -u 1000 wsl-user && \
     echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
 
+# for docker
+RUN gpasswd -a wsl-user docker
+
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
 
