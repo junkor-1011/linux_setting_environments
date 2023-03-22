@@ -10,6 +10,7 @@ RUN dnf update -y && \
     less which wget findutils rsync tar unzip zip xz bzip2 \
     whois \
     bc gawk binutils \
+    cracklib-dicts \
     bash zsh tcsh fish tmux \
     bash-completion \
     man-db man-pages \
@@ -31,8 +32,13 @@ RUN dnf update -y && \
     rm -rf /var/cache/dnf
 
 # create user
-RUN useradd -m -s /bin/bash -u 1000 wsl-user && \
-    echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
+ARG USER_NAME=wsl-user
+ARG USER_UID=1000
+ARG PASSWD=password
+RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
+    echo "${USER_NAME}:${PASSWD}" | chpasswd && \
+    echo "${USER_NAME} ALL=(ALL) ALL" >> /etc/sudoers
+    # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for docker
 RUN gpasswd -a wsl-user docker
