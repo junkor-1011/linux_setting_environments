@@ -39,7 +39,8 @@ apt-get install -y --no-install-recommends \
     peco \
     exa hexyl fd-find \
     global exuberant-ctags \
-    xclip x11-apps mesa-utils-extra \
+    xclip xsel x11-apps mesa-utils-extra \
+    wl-clipboard \
     pandoc \
     libfuse2
 apt-get -y upgrade
