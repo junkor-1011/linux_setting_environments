@@ -15,6 +15,7 @@ RUN pacman -Sy --noconfirm \
     fuse \
     cloud-init \
     xclip wl-clipboard \
+    systemd \
     docker docker-compose \
     podman podman-compose \
     && \
