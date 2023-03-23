@@ -26,6 +26,8 @@ RUN dnf update -y && \
     podman podman-compose \
     dnf-plugins-core \
     && \
+    dnf reinstall -y shadow-utils \
+    && \
     # docker-ce \
     dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
     dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \

@@ -43,7 +43,7 @@ RUN apt-get -y update && \
     wl-clipboard \
     pandoc \
     libfuse2 \
-    podman podman-compose \
+    podman podman-compose uidmap \
     && \
     # Docker \
     apt-get install -y \
