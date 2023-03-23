@@ -18,8 +18,9 @@ RUN dnf update -y && \
     cloud-init \
     git tig \
     tree jq multitail expect \
-    exa hexyl fd-find bat ripgrep \
-    xclip xeyes \
+    exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr \
+    xclip xsel xeyes \
+    wl-clipboard \
     podman podman-compose \
     dnf-plugins-core \
     && \
@@ -46,5 +47,8 @@ RUN gpasswd -a wsl-user docker
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
 
+# git
+COPY gitconfig /home/${USER_NAME}/.gitconfig
+
 USER wsl-user
-WORKDIR /home/wsl-user
+WORKDIR /home/${USER_NAME}
