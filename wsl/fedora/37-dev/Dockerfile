@@ -10,6 +10,7 @@ RUN dnf update -y && \
     less which wget findutils rsync tar unzip zip xz bzip2 \
     whois \
     bc gawk binutils \
+    util-linux-user \
     cracklib-dicts \
     bash zsh tcsh fish tmux \
     bash-completion \
@@ -19,6 +20,7 @@ RUN dnf update -y && \
     git tig \
     tree jq multitail expect \
     exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr \
+    fuse \
     xclip xsel xeyes \
     wl-clipboard \
     podman podman-compose \
@@ -36,7 +38,7 @@ RUN dnf update -y && \
 ARG USER_NAME=wsl-user
 ARG USER_UID=1000
 ARG PASSWD=password
-RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
+RUN useradd -m -s /bin/zsh -u ${USER_UID} ${USER_NAME} && \
     echo "${USER_NAME}:${PASSWD}" | chpasswd && \
     echo "${USER_NAME} ALL=(ALL) ALL" >> /etc/sudoers
     # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
