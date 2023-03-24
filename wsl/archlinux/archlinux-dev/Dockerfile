@@ -11,6 +11,7 @@ RUN pacman -Syyu --noconfirm && \
     coreutils \
     which less wget binutils \
     tree jq expect \
+    nano vim \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry \
     git tig \
