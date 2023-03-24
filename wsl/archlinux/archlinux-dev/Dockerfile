@@ -1,7 +1,9 @@
-FROM archlinux:latest
+FROM docker.io/library/archlinux:latest
 
 USER root
-RUN pacman -Sy --noconfirm \
+RUN pacman-key --init
+RUN pacman -Syyu --noconfirm && \
+    pacman -Sy --noconfirm \
     bash zsh fish tcsh tmux \
     bash-completion \
     sudo \
@@ -9,13 +11,15 @@ RUN pacman -Sy --noconfirm \
     coreutils \
     which less wget \
     tree jq expect \
-    python python-pip \
+    dnsutils iproute2 net-tools traceroute \
+    python python-pip python-pipenv python-poetry \
     git tig \
     exa fzf procs bat hexyl fd ripgrep duf htop ncdu tldr \
     fuse \
     cloud-init \
     xclip wl-clipboard \
     systemd \
+    fuse-overlayfs \
     docker docker-compose \
     podman podman-compose \
     && \
@@ -38,7 +42,7 @@ RUN gpasswd -a wsl-user docker
 COPY wsl.conf /etc/wsl.conf
 
 # git
-COPY gitconfig /home/${USER_NAME}/.gitconfig
+COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 
 USER wsl-user
 WORKDIR /home/${USER_NAME}
