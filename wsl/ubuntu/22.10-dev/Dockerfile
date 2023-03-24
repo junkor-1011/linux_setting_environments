@@ -82,7 +82,7 @@ RUN gpasswd -a wsl-user docker
 COPY wsl.conf /etc/wsl.conf
 
 # git
-COPY gitconfig /home/${USER_NAME}/.gitconfig
+COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 
 USER wsl-user
 WORKDIR /home/${USER_NAME}
