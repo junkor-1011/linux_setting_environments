@@ -9,7 +9,7 @@ RUN pacman -Syyu --noconfirm && \
     sudo \
     man-db \
     coreutils \
-    which less wget \
+    which less wget binutils \
     tree jq expect \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry \
@@ -21,7 +21,7 @@ RUN pacman -Syyu --noconfirm && \
     systemd \
     fuse-overlayfs \
     docker docker-compose \
-    podman podman-compose \
+    # podman podman-compose \
     && \
     pacman -Scc && \
     rm -rf /var/cache/pacman/*
