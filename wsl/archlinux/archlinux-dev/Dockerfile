@@ -7,7 +7,7 @@ RUN pacman -Syyu --noconfirm && \
     bash zsh fish tcsh tmux \
     bash-completion \
     sudo \
-    man-db \
+    man-db man-pages \
     coreutils \
     which less wget binutils \
     tree jq expect \
