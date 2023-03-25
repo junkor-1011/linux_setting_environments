@@ -22,12 +22,15 @@ RUN dnf update -y && \
     rm -rf /var/cache/yum && \
     rm -rf /var/cache/dnf
 
-# create ec2-user
+# create ec2-user & ssm-user
 RUN useradd -m -s /bin/bash -u 1000 ec2-user && \
     echo "ec2-user ALL=NOPASSWD: ALL" >> /etc/sudoers
+RUN useradd -m -s /bin/bash -u 1001 ssm-user && \
+    echo "ssm-user ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for sshd.service
-RUN ssh-keygen -A
+RUN ssh-keygen -A && \
+    systemctl enable sshd.service
 
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
