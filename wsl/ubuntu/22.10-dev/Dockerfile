@@ -12,7 +12,7 @@ RUN apt-get -y update && \
     yes | unminimize && \
     # add packages \
     apt-get install -y --no-install-recommends \
-    build-essential \
+    # build-essential \
     zip unzip bzip2 xz-utils \
     p7zip-full unrar \
     nkf dos2unix \
@@ -72,6 +72,9 @@ RUN apt-get -y update && \
 
 # for docker
 RUN systemctl enable docker
+
+# apt conf
+COPY apt.conf.d/ /etc/apt/apt.conf.d/
 
 # create user
 ARG USER_NAME=wsl-user
