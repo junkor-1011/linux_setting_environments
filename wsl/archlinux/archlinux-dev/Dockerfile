@@ -47,6 +47,11 @@ RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
 RUN gpasswd -a wsl-user docker
 RUN systemctl enable docker
 
+# for rootless
+RUN echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf && \
+    echo "${USER_NAME}:100000:65536" >> /etc/subuid && \
+    echo "${USER_NAME}:100000:65536" >> /etc/subgid
+
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
 
