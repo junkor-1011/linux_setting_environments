@@ -13,12 +13,16 @@ RUN pacman -Syyu --noconfirm && \
     man-db man-pages \
     coreutils \
     which less wget binutils \
+    whois \
+    openssh autossh \
     tree jq expect \
+    shellcheck shfmt \
+    trivy \
     nano vim \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry \
     git tig \
-    exa fzf procs bat hexyl fd ripgrep duf htop ncdu tldr \
+    exa fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide \
     fuse \
     cloud-init \
     xclip wl-clipboard \
