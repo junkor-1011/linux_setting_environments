@@ -1,4 +1,4 @@
-FROM ubuntu:kinetic
+FROM docker.io/library/ubuntu:kinetic
 
 USER root
 
