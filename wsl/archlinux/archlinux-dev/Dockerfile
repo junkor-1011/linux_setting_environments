@@ -8,7 +8,7 @@ RUN pacman-key --init
 RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
     bash zsh fish tcsh tmux \
-    bash-completion \
+    bash-completion zsh-completions \
     sudo \
     man-db man-pages \
     coreutils \
@@ -18,7 +18,7 @@ RUN pacman -Syyu --noconfirm && \
     tree jq expect \
     shellcheck shfmt \
     trivy \
-    nano vim \
+    vi nano vim \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry \
     git tig \
@@ -29,7 +29,7 @@ RUN pacman -Syyu --noconfirm && \
     systemd \
     fuse-overlayfs \
     docker docker-compose \
-    # podman podman-compose \
+    podman podman-compose \
     && \
     pacman -Scc && \
     rm -rf /var/cache/pacman/*
@@ -49,8 +49,10 @@ RUN systemctl enable docker
 
 # for rootless
 RUN echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf && \
-    echo "${USER_NAME}:100000:65536" >> /etc/subuid && \
-    echo "${USER_NAME}:100000:65536" >> /etc/subgid
+    # echo "${USER_NAME}:100000:65536" >> /etc/subuid && \
+    # echo "${USER_NAME}:100000:65536" >> /etc/subgid && \
+    chmod u+s /usr/sbin/newuidmap && \
+    chmod u+s /usr/sbin/newgidmap
 
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
