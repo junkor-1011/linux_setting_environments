@@ -24,7 +24,7 @@ RUN dnf update -y && \
     cloud-init \
     git tig \
     tree jq multitail expect \
-    fzf exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr \
+    fzf exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
     hadolint \
     fuse \
     xclip xsel xeyes \
