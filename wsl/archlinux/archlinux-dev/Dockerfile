@@ -1,6 +1,9 @@
 FROM docker.io/library/archlinux:latest
 
 USER root
+
+RUN sed -i -e 's|^\(NoExtract *= *usr/share/man/\)|#\1|' /etc/pacman.conf
+
 RUN pacman-key --init
 RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
@@ -38,6 +41,7 @@ RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
 
 # for docker
 RUN gpasswd -a wsl-user docker
+RUN systemctl enable docker
 
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
