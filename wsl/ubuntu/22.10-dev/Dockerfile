@@ -2,10 +2,14 @@ FROM docker.io/library/ubuntu:kinetic
 
 USER root
 
-ENV TZ=Asia/Tokyo
+# ARG TZ=Asia/Tokyo
+ARG TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN rm /etc/apt/apt.conf.d/docker-*
+
 RUN apt-get -y update && \
+    yes | unminimize && \
     # add packages \
     apt-get install -y --no-install-recommends \
     build-essential \
@@ -30,14 +34,14 @@ RUN apt-get -y update && \
     locales \
     expect \
     tmux bash zsh fish \
-    shellcheck \
+    shellcheck shfmt \
     sudo \
     # ruby \
     python3 python3-pip python3-venv \
-    silversearcher-ag ack \
-    peco \
+    # silversearcher-ag ack \
+    # peco \
     fzf bat exa hexyl fd-find duf htop tldr ncdu ripgrep \
-    global exuberant-ctags \
+    # global exuberant-ctags \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
     wl-clipboard \
@@ -65,6 +69,9 @@ RUN apt-get -y update && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# for docker
+RUN systemctl enable docker
 
 # create user
 ARG USER_NAME=wsl-user
