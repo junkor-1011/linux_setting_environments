@@ -1,11 +1,15 @@
 FROM fedora:37
 
 USER root
+# for man
+RUN sed -i -e 's/tsflags/# tsflags/g' /etc/dnf/dnf.conf
+
+# install packages
 RUN dnf update -y && \
     # add packages \
     dnf install -y nano vim \
     sudo passwd \
-    openssh openssh-clients \
+    openssh openssh-clients autossh \
     net-tools iproute iputils hostname gnutls bind-utils nmap nc \
     less which wget findutils rsync tar unzip zip xz bzip2 \
     whois \
@@ -14,12 +18,14 @@ RUN dnf update -y && \
     cracklib-dicts \
     bash zsh tcsh fish tmux \
     bash-completion \
+    ShellCheck shfmt \
     man-db man-pages \
     python3 python3-pip \
     cloud-init \
     git tig \
     tree jq multitail expect \
     fzf exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr \
+    hadolint \
     fuse \
     xclip xsel xeyes \
     wl-clipboard \
@@ -36,6 +42,9 @@ RUN dnf update -y && \
     rm -rf /var/cache/yum && \
     rm -rf /var/cache/dnf
 
+# enable service
+RUN systemctl enable docker
+
 # create user
 ARG USER_NAME=wsl-user
 ARG USER_UID=1000
@@ -43,7 +52,7 @@ ARG PASSWD=password
 RUN useradd -m -s /bin/zsh -u ${USER_UID} ${USER_NAME} && \
     echo "${USER_NAME}:${PASSWD}" | chpasswd && \
     echo "${USER_NAME} ALL=(ALL) ALL" >> /etc/sudoers
-    # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
+    # echo "${USER_NAME} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for docker
 RUN gpasswd -a wsl-user docker
