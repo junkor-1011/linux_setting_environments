@@ -13,6 +13,7 @@ RUN apt-get -y update && \
     # add packages \
     apt-get install -y --no-install-recommends \
     # build-essential \
+    command-not-found \
     zip unzip bzip2 xz-utils \
     p7zip-full unrar \
     nkf dos2unix \
@@ -20,7 +21,7 @@ RUN apt-get -y update && \
     tree \
     jq \
     nano vim emacs \
-    net-tools iproute2 \
+    net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
     xxd bc gawk binutils \
     whois \
     autossh openssl libssl-dev \
@@ -40,7 +41,7 @@ RUN apt-get -y update && \
     python3 python3-pip python3-venv \
     # silversearcher-ag ack \
     # peco \
-    fzf bat exa hexyl fd-find duf htop tldr ncdu ripgrep \
+    fzf bat exa hexyl fd-find duf htop tldr ncdu ripgrep zoxide \
     # global exuberant-ctags \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
