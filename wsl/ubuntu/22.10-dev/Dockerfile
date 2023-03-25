@@ -89,6 +89,10 @@ RUN useradd -m -s /bin/zsh -u ${USER_UID} ${USER_NAME} && \
 # for docker
 RUN gpasswd -a wsl-user docker
 
+# locale
+RUN locale-gen en_US.UTF-8
+ENV LANG=en.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
 
