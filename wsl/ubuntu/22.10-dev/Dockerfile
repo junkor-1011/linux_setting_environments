@@ -87,7 +87,7 @@ RUN useradd -m -s /bin/zsh -u ${USER_UID} ${USER_NAME} && \
     # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for docker
-RUN gpasswd -a wsl-user docker
+RUN gpasswd -a ${USER_NAME} docker
 
 # locale
 RUN locale-gen en_US.UTF-8

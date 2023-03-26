@@ -44,7 +44,7 @@ RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
     # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for docker
-RUN gpasswd -a wsl-user docker
+RUN gpasswd -a ${USER_NAME} docker
 RUN systemctl enable docker
 
 # for rootless
