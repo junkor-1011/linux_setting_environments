@@ -60,5 +60,5 @@ COPY wsl.conf /etc/wsl.conf
 # git
 COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 
-USER wsl-user
+USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
