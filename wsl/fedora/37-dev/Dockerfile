@@ -46,6 +46,7 @@ RUN dnf update -y && \
 RUN systemctl enable docker
 
 # create user
+ENV USER_NAME_DEFAULT=wsl-user
 ARG USER_NAME=wsl-user
 ARG USER_UID=1000
 ARG PASSWD=password
@@ -59,6 +60,7 @@ RUN gpasswd -a ${USER_NAME} docker
 
 # WSL2 setting
 COPY wsl.conf /etc/wsl.conf
+RUN sed -i -e "s|${USER_NAME_DEFAULT}|${USER_NAME}|g" /etc/wsl.conf
 
 # git
 COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
