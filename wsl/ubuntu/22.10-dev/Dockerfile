@@ -21,7 +21,7 @@ RUN apt-get -y update && \
     tree \
     jq \
     nano vim emacs \
-    net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
+    bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
     xxd bc gawk binutils \
     whois \
     autossh openssl libssl-dev \
