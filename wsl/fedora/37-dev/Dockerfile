@@ -13,6 +13,8 @@ RUN dnf update -y && \
     net-tools iproute iputils hostname gnutls bind-utils nmap nc \
     less which wget findutils rsync tar unzip zip xz bzip2 \
     whois \
+    make \
+    fontconfig \
     bc gawk binutils \
     util-linux-user \
     cracklib-dicts \

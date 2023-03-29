@@ -19,6 +19,8 @@ RUN pacman -Syyu --noconfirm && \
     shellcheck shfmt \
     trivy \
     vi nano vim \
+    make \
+    fontconfig \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry \
     git tig \
