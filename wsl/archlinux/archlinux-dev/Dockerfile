@@ -27,7 +27,7 @@ RUN pacman -Syyu --noconfirm && \
     exa fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide \
     fuse \
     cloud-init \
-    xclip wl-clipboard \
+    xorg-xeyes xclip wl-clipboard \
     systemd \
     fuse-overlayfs \
     docker docker-compose \
