@@ -23,8 +23,9 @@ RUN dnf update -y && \
     ShellCheck shfmt \
     man-db man-pages \
     python3 python3-pip \
-    cloud-init \
+    # cloud-init \
     git tig \
+    git-secrets \
     tree jq multitail expect \
     fzf exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
     hadolint \

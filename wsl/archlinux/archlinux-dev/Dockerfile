@@ -26,7 +26,7 @@ RUN pacman -Syyu --noconfirm && \
     git tig \
     exa fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide \
     fuse \
-    cloud-init \
+    # cloud-init \
     xorg-xeyes xclip wl-clipboard \
     systemd \
     fuse-overlayfs \

@@ -29,6 +29,7 @@ RUN apt-get -y update && \
     git tig \
     # subversion \
     git-flow \
+    git-secrets \
     ca-certificates \
     fontconfig \
     fonts-ipafont \
