@@ -27,7 +27,7 @@ RUN dnf update -y && \
     git tig \
     git-secrets \
     tree jq multitail expect \
-    fzf exa hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
+    fzf exa lsd hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
     hadolint \
     fuse \
     xclip xsel xeyes \
