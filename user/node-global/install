@@ -2,9 +2,9 @@
 set -eu
 
 corepack enable npm yarn pnpm
-corepack prepare npm@9.6.2 --activate
+corepack prepare npm@9.6.5 --activate
 corepack prepare yarn@1.22.19 --activate
-corepack prepare pnpm@7.30.3 --activate
+corepack prepare pnpm@8.3.1 --activate
 
 npm install --global \
     tsx \
