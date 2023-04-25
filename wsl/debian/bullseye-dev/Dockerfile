@@ -15,7 +15,7 @@ RUN apt-get -y update && \
     command-not-found \
     zip unzip bzip2 xz-utils \
     p7zip-full \
-    # unrar \
+    unrar-free \
     nkf dos2unix \
     man-db man \
     tree \
