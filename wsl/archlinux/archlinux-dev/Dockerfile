@@ -13,6 +13,7 @@ RUN pacman -Syyu --noconfirm && \
     man-db man-pages \
     coreutils \
     which less wget binutils \
+    dos2unix unrar unrar-free p7zip \
     whois \
     openssh autossh \
     tree jq expect \
@@ -30,6 +31,7 @@ RUN pacman -Syyu --noconfirm && \
     xorg-xeyes xclip wl-clipboard \
     systemd \
     fuse-overlayfs \
+    iptables \
     docker docker-compose \
     podman podman-compose \
     && \

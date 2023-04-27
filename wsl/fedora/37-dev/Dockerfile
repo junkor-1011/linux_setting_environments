@@ -12,6 +12,7 @@ RUN dnf update -y && \
     openssh openssh-clients autossh \
     net-tools iproute iputils hostname gnutls bind-utils nmap nc \
     less which wget findutils rsync tar unzip zip xz bzip2 \
+    dos2unix nkf unrar p7zip p7zip-plugins \
     whois \
     make \
     fontconfig \
