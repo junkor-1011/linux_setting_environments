@@ -1,7 +1,8 @@
 
 " set host_prog
+let g:python3_host_prog = "/usr/bin/python3"
 " let $PYTHON3_NVIM_BACKEND = "$HOME/.pyenv/versions/miniconda3-latest/envs/nvim_backend/bin/python3"
-let g:python3_host_prog = "$HOME/.anyenv/envs/pyenv/versions/mambaforge/envs/nvim_backend/bin/python3"
+" let g:python3_host_prog = "$HOME/.anyenv/envs/pyenv/versions/mambaforge/envs/nvim_backend/bin/python3"
 " let $NODE_NVIM_BACKEND = "$HOME/LocalApps/nodejs/lib/node_modules/neovim/bin/cli.js"
 " let $NODE_NVIM_BACKEND = "$HOME/.pyenv/versions/miniconda3-latest/envs/nvim_backend/lib/node_modules/neovim/bin/cli.js"
 
