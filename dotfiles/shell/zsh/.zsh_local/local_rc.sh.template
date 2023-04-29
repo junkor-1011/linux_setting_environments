@@ -73,5 +73,21 @@ fi
 # alias cdk='npx aws-cdk'
 # alias awslocal='aws --endpoint-url=http://localhost:4566 --profile=localstack'
 
+# cat alternative
+if type batcat > /dev/null 2>&1; then
+    alias bat='batcat'
+fi
+
+# ls alternative
+if type lsd > /dev/null 2>&1; then
+    alias la='lsd -AF'
+    alias ll='lsd -alF'
+    alias l='lsd -F'
+elif type exa > /dev/null 2>&1; then
+    alias la='exa -aF --icons --color=auto'
+    alias ll='exa -alF --icons --color=auto'
+    alias l='exa -F --icons --color=auto'
+fi
+
 # modeline
 # vim: set ft=sh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :
