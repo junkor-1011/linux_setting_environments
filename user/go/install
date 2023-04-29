@@ -2,32 +2,32 @@
 set -eux
 
 # get script path
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
-cd $SCRIPT_DIR
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
 
 # ToDo: Auguments or Config
-VERSION=1.20.2
+VERSION=1.20.3
 OS=linux
 ARCH=amd64
-PACKAGE_TGZ=go${VERSION}.${OS}-${ARCH}.tar.gz
-INSTALL_PATH=${HOME}/LocalApps
-EXECUTE_PATH=${HOME}/bin
+PACKAGE_TGZ="go${VERSION}.${OS}-${ARCH}.tar.gz"
+INSTALL_PATH="${HOME}/LocalApps"
+EXECUTE_PATH="${HOME}/bin"
 
 echo "Let's Install Go ver: ${VERSION}, please check if there is newer version."
 
 # Download binary package
-curl -LO https://golang.org/dl/${PACKAGE_TGZ}
+curl -LO "https://golang.org/dl/${PACKAGE_TGZ}"
 
 # install (and if exists, remove previous version at /usr/local/go)
-rm -rf ${INSTALL_PATH}/go
-tar -C ${INSTALL_PATH} -xzf ${PACKAGE_TGZ}
+rm -rf "${INSTALL_PATH}/go"
+tar -C "${INSTALL_PATH}" -xzf "${PACKAGE_TGZ}"
 
 for filepath in ${INSTALL_PATH}/go/bin/*; do
-    array=($(echo ${filepath} | tr "/" " "))
-    file=${array[$((${#array[@]}-1))]}
+    array=("$(echo "${filepath}" | tr "/" " ")")
+    file="${array[$((${#array[@]}-1))]}"
 
-    ln -sfv ${filepath} ${EXECUTE_PATH}/${file}
+    ln -sfv "${filepath}" "${EXECUTE_PATH}/${file}"
 done
 
 # rm package tar.gz file
-rm ${PACKAGE_TGZ}
+rm "${PACKAGE_TGZ}"
