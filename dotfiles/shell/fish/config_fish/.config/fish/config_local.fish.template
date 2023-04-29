@@ -1,0 +1,141 @@
+
+# homebrew
+if test (uname -s) = "Darwin"
+    # ToDo: for MacOS setting
+else if test (uname -s) = "Linux"
+    if test -d /home/linuxbrew/.linuxbrew
+        set -x HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
+    else if test -d $HOME/.linuxbrew
+        set -x HOMEBREW_PREFIX $HOME/.linuxbrew
+    end
+    # set ENV
+    if test -n $HOMEBREW_PREFIX
+        # using ($HOMEBREW_PREFIX/bin/brew shellenv)
+        set -x HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
+        set -x HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/Homebrew
+        set -g fish_user_paths $HOMEBREW_PREFIX/bin $fish_user_paths
+        set -x MANPATH $HOMEBREW_PREFIX/share/man $MANPATH
+        set -x INFOPATH $HOMEBREW_PREFIX/share/info $INFOPATH
+
+        # completion
+        # ToDo: work well
+        if test -d "$HOMEBREW_PREFIX/share/fish/completions"
+            # set -gx fish_complete_path $fish_complete_path $HOMEBREW_PREFIX/share/fish/completions
+            set -x fish_complete_path $fish_complete_path $HOMEBREW_PREFIX/share/fish/completions
+        end
+
+        if test -d "$HOMEBREW_PREFIX/share/fish/vendor_completions.d"
+            # set -gx fish_complete_path $fish_complete_path $HOMEBREW_PREFIX/share/fish/vendor_completions.d
+            set -x fish_complete_path $fish_complete_path $HOMEBREW_PREFIX/share/fish/vendor_completions.d
+        end
+
+        # alias to prevent from conflict between homebrew and pyenv
+        # alias brew="env PATH=$HOMEBREW_PREFIX/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin brew"
+        # Note: prevent complete: maximum recursion depth reached
+        function brew
+            PATH=$HOMEBREW_PREFIX/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin command brew $argv
+        end
+    end
+end
+
+# anyenv
+if test -d $HOME/.anyenv
+    set -g fish_user_paths $HOME/.anyenv/bin $fish_user_paths
+    eval (anyenv init - fish | source)
+
+    # pyenv
+    if test -d (anyenv root)/envs/pyenv
+        eval (pyenv init - | source)
+        eval (pyenv virtualenv-init - | source)
+        source (pyenv root)/completions/pyenv.fish
+    end
+
+    # nodenv
+    if test -d (anyenv root)/envs/nodenv
+        eval (nodenv init - | source)
+    end
+else if test -d $HOME/.pyenv
+    # pyenv
+    set -x PYENV_ROOT $HOME/.pyenv
+    set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+    # eval (pyenv init -)
+    status --is-interactive; and pyenv init - | source
+    status --is-interactive; and pyenv virtualenv-init - | source
+end
+
+# aws-cli(ver2) completion
+if type aws_completer > /dev/null 2>&1
+    complete -c aws -f -a '(
+    begin
+        set -lx COMP_SHELL fish
+        set -lx COMP_LINE (commandline)
+        aws_completer
+    end
+    )'
+end
+
+# default editor
+# if test -x /usr/bin/nvim
+if type nvim > /dev/null 2>&1
+    set -x EDITOR (which nvim)
+    alias vim=(which nvim)
+    alias vi='/usr/bin/vim'
+else
+    set -x EDITOR /usr/bin/vim
+end
+
+## X11 for client machine ##
+# set -x DISPLAY localhost:0.0
+# for WSL2(need to set system & antivirus software's firewall)
+# set -x DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+# set -x LIBGL_ALWAYS_INDIRECT 1
+alias set_x11local='set -x DISPLAY (cat /etc/resolv.conf | grep nameserver | awk \'{print $2}\'):0; set -x LIBGL_ALWAYS_INDIRECT 1'
+alias unset_x11local='set -e DISPLAY; set -e LIBGL_ALWAYS_INDIRECT'
+
+
+# ### Docker for Windows in WSL ###
+# TMP
+# if test -x /usr/bin/wslsys
+#     set -x DOCKER_HOST tcp://0.0.0.0:2375
+#     alias docker "DOCKER_HOST=$DOCKER_HOST /usr/bin/docker"
+# end
+
+
+## nodejs ##
+# if test -d $HOME/LocalApps/nodejs
+#     set -x NODEJS_HOME $HOME/LocalApps/nodejs
+#     # set -x PATH $NODEJS_HOME/bin:$PATH
+#     set -g fish_user_paths $NODEJS_HOME/bin $fish_user_paths
+# end
+
+## deno ##
+if test -d $HOME/.deno
+    set -x DENO_INSTALL $HOME/.deno
+    set -g fish_user_paths $HOME/.deno/bin $fish_user_paths
+end
+
+## go ##
+if test (type go)
+    set -x GOPATH $HOME/.go
+else if test -x /usr/local/go/bin/go
+    set -g fish_user_paths /usr/local/go/bin $fish_user_paths
+    set -x GOPATH $HOME/.go
+end
+
+## c++ for atcoder
+if test -f $HOME/LocalApps/atcoder/cpp/include/bits/stdc++.h
+    set -x CPLUS_INCLUDE_PATH $CPLUS_INCLUDE_PATH:$HOME/LocalApps/atcoder/cpp/include/
+end
+
+## fzf
+if test -d $HOME/.fzf/bin
+    set -g fish_user_paths $HOME/.fzf/bin $fish_user_paths
+    # set -x PATH $HOME/.fzf/bin $PATH
+end
+
+## user-original ##
+# set -x PATH $HOME/bin:$PATH
+set -g fish_user_paths $HOME/bin $fish_user_paths
+
+# modeline
+# vim: set ft=fish ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :

@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "jsx": "react",
+    "lib": ["deno.window"],
+    "strict": true
+  },
+  "lint": {
+    "files": {
+      // "include": ["src"],
+      "include": ["."],
+      "exclude": ["public"]
+    },
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": []
+    }
+  },
+  "fmt": {
+    "files": {
+      // "include": ["src/"],
+      "include": ["./"],
+      "exclude": [".vscode", ".env"]
+    },
+    "options": {
+      "useTabs": false,
+      "lineWidth": 100,
+      "indentWidth": 2,
+      "singleQuote": true,
+      "proseWrap": "preserve"
+    }
+  },
+  "importMap": "import_map.json",
+  "tasks": {
+    "test": "deno test"
+  }
+}

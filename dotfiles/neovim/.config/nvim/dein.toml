@@ -1,0 +1,188 @@
+# Package Magager
+# [[plugins]]
+# repo = 'Shougo/dein.vim'
+
+## denops
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+## Themes, StatusLine, Visualization
+
+# statusline plugin
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+hook_add = '''
+source ~/.config/nvim/plugins_dein/vim-airline.vim
+" default theme: dark
+let g:airline_theme = 'dark'
+"let g:airline_theme = 'molokai'
+" let g:airline_powerline_fonts = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+## colorscheme
+#[[plugins]]
+#repo = 'joshdick/onedark.vim'
+#hook_add = '''
+#colorscheme onedark
+#'''
+
+### colored bracket
+[[plugins]]
+repo = 'luochen1990/rainbow'
+
+# File Tree
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+
+# Git
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+# editor utils
+
+## Search
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+source ~/.config/nvim/plugins_dein/anzu.vim
+'''
+
+## tab
+#[[plugins]]
+#repo = 'ervandew/supertab'
+
+## repeat
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+## surround
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+hook_add = '''
+nmap <C-_> gcc
+xmap <C-_> gcc
+" ToDo: move to dein_lazy
+'''
+
+## bracket
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+## visual expand
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+hook_add = '''
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+" ToDo: move to dein_lazy
+'''
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+
+## syntax
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+
+## Syntax checker
+# [[plugins]]
+# repo = 'dense-analysis/ale'
+# hook_add = '''
+# source ~/.config/nvim/plugins_dein/ale.vim
+# '''
+
+## mark, tag
+[[plugins]]
+repo = 'szw/vim-tags'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+" TMP
+nmap <F8> :TagbarToggle<CR>
+'''
+
+[[plugins]]
+repo = 'jacquesbh/vim-showmarks'
+
+# LSP
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_source = '''
+source ~/.config/nvim/plugins_dein/vim-lsp.vim
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_source = '''
+source ~/.config/nvim/plugins_dein/vim-lsp-setting.vim
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
+# vim-lsp
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+
+# [[plugins]]
+# repo = 'hrsh7th/vim-vsnip'
+# merged = 0
+# hook_add = '''
+# source ~/.config/nvim/plugins_dein/vim-vsnip.vim
+# '''
+
+# [[plugins]]
+# repo = 'hrsh7th/vim-vsnip-integ'
+
+# [[plugins]]
+# repo = 'tsuyoshicho/vim-efm-langserver-settings'
+# depends = ['vim-lsp']
+
+
+# DEBUG
+# need to create `$PROJECT_DIR/.vimspector.json`
+# [[plugins]]
+# repo = 'puremourning/vimspector'
+# # on_ft = ["python", "javascript", "sh", "bash"]
+# build = "./install_gadget.py --enable-python --enable-bash --force-enable-chrome"
+# hook_add = '''
+# source ~/.config/nvim/plugins_dein/vimspector.vim
+# '''
+
+# template
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+hook_add = '''
+let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictemplate'
+'''
+
+# spellcheck
+[[plugins]]
+repo = 'kamykn/spelunker.vim'
+
+# prisma
+[[plugins]]
+repo = 'pantharshit00/vim-prisma'

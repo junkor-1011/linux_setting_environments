@@ -1,0 +1,88 @@
+
+# homebrew
+if [ "$(uname -s)" = "Darwin" ]; then
+    # ToDo: for MacOS setting
+    :
+elif [ "$(uname -s)" = "Linux" ]; then
+    if [ -d /home/linuxbrew/.linuxbrew ]; then
+        export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+    elif [ -d $HOME/.linuxbrew ]; then
+        export HOMEBREW_PREFIX=$HOME/.linuxbrew
+    fi
+    # set ENV
+    if [ -n "$HOMEBREW_PREFIX" ]; then
+        # using `$HOMEBREW_PREFIX/bin/brew shellenv`
+        # export PATH=$HOMEBREW_PREFIX/bin:$PATH
+        export HOMEBREW_CELLAR="${HOMEBREW_PREFIX}/Cellar"
+        export HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}/Homebrew"
+        export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
+        export MANPATH="${HOMEBREW_PREFIX}/share/man${MANPATH+:$MANPATH}:"
+        export INFOPATH="${HOMEBREW_PREFIX}/share/info:${INFOPATH:-}"
+
+        # completion
+        FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
+        autoload -Uz compinit
+        compinit
+
+        # alias to prevent from conflict between homebrew and pyenv
+        alias brew="PATH=${HOMEBREW_PREFIX}/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin brew"
+    fi
+fi
+
+# anyenv
+if [ -d $HOME/.anyenv ]; then
+    # export ANYENV_ROOT="$(anyenv root)"
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+
+    # pyenv
+    if [ -d $(anyenv root)/envs/pyenv ]; then
+        # eval "$(pyenv init -)"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv virtualenv-init -)"
+        source $(pyenv root)/completions/pyenv.zsh
+    fi
+
+    # nodenv
+    if [ -d $(anyenv root)/envs/nodenv ]; then
+        eval "$(nodenv init -)"
+    fi
+else
+    # pyenv
+    if [ -d $HOME/.pyenv ]; then
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+        source $(pyenv root)/completions/pyenv.zsh
+    elif [ -d "$HOME/LocalApps/Mambaforge" ]; then
+        source "$HOME/LocalApps/Mambaforge/etc/profile.d/conda.sh"
+        source "$HOME/LocalApps/Mambaforge/etc/profile.d/mamba.sh"
+    fi
+fi
+
+# nvm
+if [ -d "${HOME}/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+# pnpm
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# aws-cli(ver2) completion
+if type aws_completer > /dev/null 2>&1; then
+    autoload bashcompinit && bashcompinit
+    complete -C "$(which aws_completer)" aws
+fi
+
+# zoxide
+if type zoxide > /dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
+
+# modeline
+# vim: set ft=zsh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :

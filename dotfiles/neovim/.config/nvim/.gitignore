@@ -1,0 +1,10 @@
+local_setting.vim
+dein_disable.vim
+kite
+GTAGS
+GPATH
+GRTAGS
+tags
+.tags
+.ctags
+

@@ -1,0 +1,554 @@
+
+# Defx
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-git'
+
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+if = "has('nvim')"
+build = ':UpdateRemotePlugins'
+depends = ['defx-git', 'defx-icons']
+on_cmd = 'Defx'
+hook_add = '''
+nnoremap <silent> <Leader>f :<C-u> Defx <CR>
+'''
+hook_source = '''
+source ~/.config/nvim/plugins_dein/defx.vim
+'''
+
+# Fern
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+depends = [
+    'fern-renderer-nerdfont.vim',
+    'fern-git-status.vim',
+    'fern-mapping-git.vim',
+    'nerdfont.vim',
+]
+on_cmd = 'Fern'
+hook_add = '''
+nnoremap <silent> <Leader>d :<C-u> Fern . -drawer -toggle <CR>
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+hook_source = '''
+let g:fern#renderer = "nerdfont"
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-mapping-git.vim'
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+# ddc
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+# on_i = 1
+depends = ['denops.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+source ~/.config/nvim/plugins_dein/ddc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-native'
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'LumaKernel/ddc-source-file'
+on_source = ['ddc.vim']
+
+[[plugins]]
+repo = 'shun/ddc-source-vim-lsp'
+on_source = ['ddc.vim']
+depends = ['vim-lsp.vim']
+
+# Deoplete
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# if = "has('nvim')"
+# build = ':UpdateRemotePlugins'
+# depends = [
+#     'deoplete-vim-lsp',
+#     'ultisnips',
+# ]
+# # depends = ['neosnippet.vim']
+# on_event = 'InsertEnter'
+# hook_add = '''
+# let g:deoplete#enable_at_startup = 1
+# '''
+# hook_source = '''
+# source ~/.config/nvim/plugins_dein/deoplete.vim
+# '''
+
+# pep8 indent
+[[plugins]]
+repo = 'Vimjas/vim-python-pep8-indent'
+on_ft = 'python'
+
+# python virtualenv
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python']
+
+# [[plugins]]
+# repo = 'lambdalisue/vim-pyenv'
+# on_ft = ['python']
+
+[[plugins]]
+repo = 'lambdalisue/vim-django-support'
+on_ft = ['python', 'djangohtml']
+
+
+# zsh
+# [[plugins]]
+# repo = 'deoplete-plugins/deoplete-zsh'
+# on_ft = 'zsh'
+
+
+# vim-lsp
+# [[plugins]]
+# repo = 'lighttiger2505/deoplete-vim-lsp'
+# # on_event = 'InsertEnter'
+# depends = ['deoplete.nvim']
+# hook_source = '''
+# source ~/.config/nvim/plugins_dein/deoplete-vim-lsp.vim
+# '''
+# hook_post_source = '''
+# " ToDo
+# call deoplete#custom#source('lsp', 'rank', 6000)
+# '''
+
+
+# DEBUG
+# うまく読み込まれていない様子
+# [[plugins]]
+# repo = 'puremourning/vimspector'
+# on_ft = ["python", "javascript", "sh", "bash"]
+# build = "./install_gadget.py --enable-python --enable-bash --force-enable-chrome"
+# hook_add = '''
+# source ~/.config/nvim/plugins_dein/vimspector.vim
+# '''
+
+# snippets
+# [[plugins]]
+# repo = 'Shougo/neosnippet.vim'
+# on_ft = ['snippet']
+# depends = ['neosnippet-snippets']
+# hook_post_source = '''
+# source ~/.config/nvim/plugins_dein/neosnippet.vim
+# '''
+
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+depends = ['vim-snippets']
+hook_add = '''
+    let g:UltiSnipsExpandTrigger="<c-k>"
+    let g:UltiSnipsJumpForwardTrigger="<c-k>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-snippets'
+
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-ultisnips'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+if = "has('nvim')"
+on_ft = ['vim']
+# depends = ['deoplete.nvim']
+
+[[plugins]]
+repo = 'ujihisa/neco-look'
+if = "has('nvim')"
+on_ft = ['gitcommit', 'markdown']
+# depends = ['deoplete.nvim']
+
+
+# LSP
+# [[plugins]]
+# repo = 'prabirshrestha/vim-lsp'
+# on_ft = [
+#     'python',
+#     'go',
+#     'rust',
+#     'typescript',
+#     'typescriptreact',
+#     'javascript',
+#     'javascriptreact',
+#     'css',
+#     'scss',
+#     'html',
+#     'c',
+#     'cc',
+#     'cpp',
+#     'sql',
+#     'vue',
+#     'sh',
+#     'bash',
+#     'zsh',
+#     'vim',
+#     'dockerfile',
+#     'yaml',
+#     'json',
+#     'rst',
+#     'markdown',
+# ]
+# depends = [
+#     'deoplete-vim-lsp',
+#     'vista.vim',
+#     # 'vim-lsp-typescript',
+#     # 'vim-lsp-javascript',
+#     'vim-lsp-settings',
+#     'vim-lsp-icons',
+#     'vim-lsp-snippets',
+#     'vim-lsp-ultisnips',
+# ]
+# hook_source = '''
+# source ~/.config/nvim/plugins_dein/vim-lsp.vim
+# '''
+
+# [[plugins]]
+# repo = 'mattn/vim-lsp-settings'
+# on_ft = [
+#     'python',
+#     'go',
+#     'rust',
+#     'typescript',
+#     'typescriptreact',
+#     'javascript',
+#     'javascriptreact',
+#     'css',
+#     'scss',
+#     'html',
+#     'c',
+#     'cc',
+#     'cpp',
+#     'sql',
+#     'vue',
+#     'sql',
+#     'sh',
+#     'bash',
+#     'zsh',
+#     'vim',
+#     'dockerfile',
+#     'yaml',
+#     'json',
+#     'rst',
+#     'markdown',
+# ]
+# hook_source = '''
+# source ~/.config/nvim/plugins_dein/vim-lsp-setting.vim
+# '''
+
+# [[plugins]]
+# repo = 'mattn/vim-lsp-icons'
+
+# vista
+[[plugins]]
+repo = 'liuchengxu/vista.vim'
+on_cmd = ['Vista']
+hook_add = '''
+source ~/.config/nvim/plugins_dein/vista.vim
+'''
+
+# syntax
+
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = ['markdown']
+hook_add = '''
+    let g:table_mode_corner = '|'
+    let g:table_mode_always_active = 1
+    let g:table_mode_syntax = 1
+    let g:table_mode_auto_align = 1
+    augroup TableCommands
+        autocmd!
+        autocmd FileType markdown nnoremap <silent><LocalLeader>a :<C-u>TableModeRealign<CR>
+        autocmd FileType markdown nnoremap <silent><LocalLeader>t :<C-u>Tableize<CR>
+        autocmd FileType markdown vnoremap <silent><LocalLeader>t :<C-u>'<,'>Tableize<CR>
+    augroup END
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+on_ft = ['html', 'djangohtml', 'toml']
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+on_ft = ['html', 'djangohtml', 'markdown', 'toml', 'help']
+
+
+# quick-run
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_cmd = ['QuickRun']
+depends = ['vim-quickrun-neovim-job']
+hook_add = '''
+    nnoremap <Leader>r :<C-U>QuickRun<CR>
+    xnoremap <Leader>r gv:<C-U>QuickRun<CR>
+'''
+# hook_source = '''
+# '''
+
+[[plugins]]
+repo = 'lambdalisue/vim-quickrun-neovim-job'
+hook_source = '''
+let g:quickrun_config = {'_': {}}
+
+if has('nvim')
+  " Use 'neovim_job' in Neovim
+  let g:quickrun_config._.runner = 'neovim_job'
+elseif exists('*ch_close_in')
+  " Use 'job' in Vim which support job feature
+  let g:quickrun_config._.runner = 'job'
+endif
+'''
+
+## Fuzzy Finder
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf', 'fzf-mru.vim']
+on_cmd = [
+    'FZF',
+    'Files',
+    'GFiles',
+    'Buffers',
+    'Colors',
+    'Ag',
+    'Rg',
+    'Lines',
+    'BLines',
+    'Tags',
+    'BTags',
+    'Marks',
+    'Windows',
+    'Locate',
+    'History',
+    'Snippets',
+    'BCommits',
+    'Commands',
+    'Maps',
+    'Helptags',
+    'Filetypes',
+    'FZFMru',
+]
+
+[[plugins]]
+repo = 'pbogut/fzf-mru.vim'
+
+## grep
+[[plugins]]
+repo = 'mileszs/ack.vim'
+on_cmd = ['Ack', 'AckAdd', 'AckFormSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
+
+
+# SQL Format
+[[plugins]]
+repo = 'mattn/vim-sqlfmt'
+on_ft = ['sql']
+on_map = ['<Plug>(sqlfmt)']
+on_cmd = ['SQLFmt']
+hook_add = '''
+    " Install command `pip install sqlparse`
+    let sqlfmt_bin = fnamemodify(g:python3_host_prog, ':h') . '/'. 'sqlformat'
+    let g:sqlfmt_program = sqlfmt_bin . ' -r -k upper -o %s -'
+'''
+
+
+## HTML, XML, ...
+[[plugins]]
+repo = 'alvan/vim-closetag'
+on_ft = ['html', 'djangohtml', 'javascript', 'typescript', 'typescriptreact']
+hook_source = '''
+source ~/.config/nvim/plugins_dein/vim-closetag.vim
+'''
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'djangohtml', 'css', 'javascript', 'javascriptreact','typescript', 'typescriptreact']
+
+
+
+# terminal
+[[plugins]]
+repo = "shougo/deol.nvim"
+on_cmd = ['Deol']
+hook_source = """
+source ~/.config/nvim/plugins_dein/deol.vim
+"""
+
+## Other Utils ##
+
+# DirDiff
+[[plugins]]
+repo = 'will133/vim-dirdiff'
+on_cmd = ['DirDiff']
+
+# Gundo
+[[plugins]]
+repo = 'sjl/gundo.vim'
+on_cmd = ['GundoToggle']
+hook_add = '''
+let g:gundo_prefer_python3 = 1
+nnoremap <Leader><F5> :GundoToggle<CR>
+'''
+
+[[plugins]]
+repo = 'kannokanno/previm'
+depends = ['open-browser.vim']
+on_cmd = ['PrevimOpen']
+hook_add = '''
+    " nnoremap <leader>p :PrevimOpen<CR>
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_map = ['<Plug>(openbrowser-smart-search)']
+hook_add = '''
+    let g:netrw_nogx = 1 " disable netrw's gx mapping.
+    nmap <Leader>bb <Plug>(openbrowser-smart-search)
+    vmap <Leader>bb <Plug>(openbrowser-smart-search)
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+depends = ['open-browser.vim']
+on_cmd = ['OpenGithubFile']
+# hook_add = '''
+#     nmap <Leader>bh :<C-u>OpenGithubFile<CR>
+#     vmap <Leader>bh :<C-u>OpenGithubFile<CR>
+# '''
+
+[[plugins]]
+repo = 'iberianpig/tig-explorer.vim'
+on_cmd = [
+    'TigStatus',
+    'TigOpenCurrentFile',
+]
+# hook_add = '''
+#     nnoremap <silent> <Leader>s :<C-u>TigStatus<CR>
+#     nnoremap <silent> <Leader>k :<C-u>TigOpenCurrentFile<CR>
+# '''
+
+# Git-Messenger
+[[plugins]]
+repo = 'rhysd/git-messenger.vim'
+on_cmd = ['GitMessenger']
+on_map = '<Plug>(git-messenger'
+
+
+[[plugins]]
+repo = 'nicwest/vim-camelsnek'
+on_cmd = ['Camel', 'CamelB', 'Snek', 'Kebab']
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_cmd = ['IndentLinesToggle']
+hook_add = '''
+    nnoremap <silent> <Leader>i :<C-u>IndentLinesToggle<CR>
+'''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+on_cmd = ['EasyAlign']
+hook_add = '''
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+repo = 'vim-test/vim-test'
+on_cmd = [
+    'TestNearest',
+    'TestFile',
+    'TestSuite',
+    'TestLast',
+    'TestVisit',
+]
+depends = ['tpope/vim-dispatch']
+hook_add = '''
+    let g:test#strategy = "dispatch"
+    nnoremap <silent> <Leader>tt :TestNearest<CR>
+    nnoremap <silent> <Leader>tf :TestFile<CR>
+    nnoremap <silent> <Leader>ts :TestSuite<CR>
+    nnoremap <silent> <Leader>tl :TestLast<CR>
+    nnoremap <silent> <Leader>tv :TestVisit<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+
+## trailing-whitespace
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+on_cmd = ['FixWhitespace']
+
+## bracket
+# [[plugins]]
+# repo = 'jiangmiao/auto-pairs'
+# on_event = 'InsertEnter'
+
+
+## visual expand
+# [[plugins]]
+# repo = 'terryma/vim-expand-region'
+# on_event = 'VisualEnter'
+# hook_add = '''
+# vmap v <Plug>(expand_region_expand)
+# vmap <C-v> <Plug>(expand_region_shrink)
+# '''
+
+## block
+# [[plugins]]
+# repo = 'tpope/vim-endwise'
+# on_event = 'InsertEnter'
+
+
+# Others ------
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+on_ft = ['markdown']
+depends = ['limelight.vim']
+
+[[plugins]]
+repo = 'junegunn/limelight.vim'

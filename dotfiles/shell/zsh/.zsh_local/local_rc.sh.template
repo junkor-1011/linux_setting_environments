@@ -1,0 +1,77 @@
+
+# default editor
+# if [ -x /usr/bin/nvim ]; then
+if type nvim > /dev/null 2>&1; then
+    export EDITOR=$(which nvim)
+    alias vim=$(which nvim)
+    alias vi='/usr/bin/vim'
+else
+    export EDITOR=/usr/bin/vim
+fi
+if [ -x ${HOME}/bin/nvim-nightly ]; then
+    alias nvim=${HOME}/bin/nvim-nightly
+    alias vim=${HOME}/bin/nvim-nightly
+fi
+
+## X11 for client machine ##
+# export DISPLAY=localhost:0.0
+# for WSL2 (need to set system & antivirus software's firewall)
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+# export LIBGL_ALWAYS_INDIRECT=1
+# alias set_x11local="export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0; export LIBGL_ALWAYS_INDIRECT=1"
+# alias unset_x11local="unset DISPLAY; unset LIBGL_ALWAYS_INDIRECT"
+
+
+# *** Docker for Windows in WSL ***
+#export DOCKER_HOST=tcp://localhost:2375
+# if [ -x /usr/bin/wslsys ]; then
+#     export DOCKER_HOST=tcp://0.0.0.0:2375
+#     alias docker="DOCKER_HOST=${DOCKER_HOST} docker"
+# fi
+
+# type set_prompt_hostname > /dev/null 2>&1 && set_prompt_hostname
+
+## nodejs ##
+# export NODEJS_HOME=$HOME/LocalApps/nodejs
+# export PATH=$NODEJS_HOME/bin:$PATH
+
+## deno ##
+if [ -d ${HOME}/.deno ]; then
+    export DENO_INSTALL="${HOME}/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+## Go ##
+type go >> /dev/null 2>&1
+result_tmp=$?
+if [ ${result_tmp} -ne 0 ];then
+    export GOPATH=${HOME}/.go
+elif [ -x /usr/local/go/bin/go ]; then
+    export PATH=/usr/local/go/bin:${PATH}
+    export GOPATH=${HOME}/.go
+fi
+
+## Rust
+if [ -f "${HOME}/.cargo/env" ];then
+    source "${HOME}/.cargo/env"
+fi
+
+## c++ for atcoder
+if [ -f ${HOME}/LocalApps/atcoder/cpp/include/bits/stdc++.h ]; then
+    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:${HOME}/LocalApps/atcoder/cpp/include/
+fi
+
+## Pipenv
+export PIPENV_VENV_IN_PROJECT=true
+
+## user-original ##
+export PATH=$HOME/bin:$PATH
+
+if type sl > /dev/null 2>&1; then
+    alias sl='sl -e'
+fi
+# alias cdk='npx aws-cdk'
+# alias awslocal='aws --endpoint-url=http://localhost:4566 --profile=localstack'
+
+# modeline
+# vim: set ft=sh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :

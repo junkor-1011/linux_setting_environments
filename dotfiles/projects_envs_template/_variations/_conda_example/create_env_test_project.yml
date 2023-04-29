@@ -1,0 +1,27 @@
+name: test_project
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.7.*
+  # - pynvim
+  # - nodejs
+  - flask
+  - flask-sqlalchemy
+  - scikit-learn
+  - pandas>=1.0
+  - dask
+  - sqlalchemy
+  - matplotlib
+  - seaborn
+  - networkx
+  - scipy
+  - statsmodels
+  - gdal==2.*
+  - folium
+  - geopandas
+  - geopy
+  - pygments
+  - ctags
+  - pip:
+    - sqlalchemy-views>=0.2

@@ -1,0 +1,20 @@
+name: nvim_backend
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.8.*
+  - pynvim
+  - nodejs
+  - pygments
+  - ctags
+  # - pylint
+  - python-language-server
+  - pyls-black
+  - isort
+  - yapf
+  - pip
+  - pip:
+    - pyls-isort
+    - pyls-mypy
+    - jedi-language-server

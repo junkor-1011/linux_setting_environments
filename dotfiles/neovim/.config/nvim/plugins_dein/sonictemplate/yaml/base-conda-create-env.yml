@@ -1,0 +1,10 @@
+name: env_name
+channels:
+  - conda-forge
+  - default
+dependencies:
+  # - conda
+  - python==3.9.*
+  - pip
+  - pip:
+    - python-language-server[all]
