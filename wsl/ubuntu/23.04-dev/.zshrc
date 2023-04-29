@@ -73,4 +73,6 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # zoxide
-eval "$(zoxide init zsh)"
+if type zoxide > /dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
