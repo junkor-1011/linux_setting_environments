@@ -69,5 +69,8 @@ RUN sed -i -e "s|${USER_NAME_DEFAULT}|${USER_NAME}|g" /etc/wsl.conf
 # git
 COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 
+# zshrc
+COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
+
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
