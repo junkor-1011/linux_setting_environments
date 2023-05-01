@@ -46,3 +46,5 @@ if [ -s "${EXECUTE_PATH}/protoc" ]; then
 fi
 
 ln -sfv "${INSTALL_PATH}/${WORKDIR}/bin/protoc" "${EXECUTE_PATH}/protoc"
+
+echo "protobuf version: ${VERSION} has been installed."
