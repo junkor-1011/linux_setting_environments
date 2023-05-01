@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eux
+set -eu
 
 SCRIPTDIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPTDIR"
