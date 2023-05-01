@@ -73,6 +73,12 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
+# golang
+if type go > /dev/null 2>&1; then
+    export GOPATH="$(go env GOPATH)"
+    export PATH="$PATH:$GOPATH/bin"
+fi
+
 # aws-cli(ver2) completion
 if type aws_completer > /dev/null 2>&1; then
     autoload bashcompinit && bashcompinit
