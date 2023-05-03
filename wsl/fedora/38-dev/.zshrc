@@ -74,15 +74,15 @@ fi
 
 # git
 if [ -f "$HOME"/.git-prompt.sh ]; then
-    GIT_PS1_SHOWDIRTYSTATE=true
-    GIT_PS1_SHOWUNTRACKEDFILES=true
-    GIT_PS1_SHOWSTASHSTATE=true
-    GIT_PS1_SHOWUPSTREAM=auto
-    GIT_PS1_STATESEPARATOR=" "
-    GIT_PS1_SHOWCOLORHINTS=true
-    GIT_PS1_SHOWCONFLICTSTATE="yes"
-    GIT_PS1_COMPRESSSPARSESTATE=true
-    GIT_PS1_DESCRIBE_STYLE="branch"
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export GIT_PS1_SHOWUNTRACKEDFILES=true
+    export GIT_PS1_SHOWSTASHSTATE=true
+    export GIT_PS1_SHOWUPSTREAM=auto
+    export GIT_PS1_STATESEPARATOR=" "
+    export GIT_PS1_SHOWCOLORHINTS=true
+    export GIT_PS1_SHOWCONFLICTSTATE="yes"
+    export GIT_PS1_COMPRESSSPARSESTATE=true
+    export GIT_PS1_DESCRIBE_STYLE="branch"
     source "$HOME"/.git-prompt.sh
 fi
 if [ -f "$HOME"/.zsh/_git ] && [ -f "$HOME"/.git-completion.bash ]; then
