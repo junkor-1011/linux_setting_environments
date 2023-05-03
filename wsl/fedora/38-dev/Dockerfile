@@ -75,5 +75,13 @@ COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
 # tmux
 COPY --chown=${USER_NAME}:${USER_NAME} .tmux.conf /home/${USER_NAME}/.tmux.conf
 
+# git
+RUN curl -o /home/${USER_NAME}/.git-prompt.sh -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh && \
+    curl -o /home/${USER_NAME}/.git-completion.bash -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
+    mkdir -p /home/${USER_NAME}/.zsh && \
+    curl -o /home/${USER_NAME}/.zsh/_git -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh && \
+    chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/.git-* && \
+    chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/.zsh
+
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}

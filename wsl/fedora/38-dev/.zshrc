@@ -71,3 +71,22 @@ alias l='ls -CF'
 if type zoxide > /dev/null 2>&1; then
     eval "$(zoxide init zsh)"
 fi
+
+# git
+if [ -f "$HOME"/.git-prompt.sh ]; then
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    GIT_PS1_SHOWSTASHSTATE=true
+    GIT_PS1_SHOWUPSTREAM=auto
+    GIT_PS1_STATESEPARATOR=" "
+    GIT_PS1_SHOWCOLORHINTS=true
+    GIT_PS1_SHOWCONFLICTSTATE="yes"
+    GIT_PS1_COMPRESSSPARSESTATE=true
+    GIT_PS1_DESCRIBE_STYLE="branch"
+    source "$HOME"/.git-prompt.sh
+fi
+if [ -f "$HOME"/.zsh/_git ] && [ -f "$HOME"/.git-completion.bash ]; then
+    fpath=(~/.zsh $fpath)
+    zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
+    autoload -Uz compinit && compinit
+fi
