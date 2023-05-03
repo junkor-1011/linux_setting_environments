@@ -72,5 +72,8 @@ COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 # zshrc
 COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
 
+# tmux
+COPY --chown=${USER_NAME}:${USER_NAME} .tmux.conf /home/${USER_NAME}/.tmux.conf
+
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
