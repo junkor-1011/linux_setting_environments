@@ -1,18 +1,42 @@
 # Set up the prompt
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+# PS1
+setopt PROMPT_SUBST
+export PS1='[%n@%m %~$(__git_ps1 " (%s)")]
+\$ '
+# show current dir path short:
+# export PS1='[%n@%m %c$(__git_ps1 " (%s)")]
+# \$ '
 
-setopt histignorealldups sharehistory
+# --- using theme ---
+# autoload -Uz promptinit
+# promptinit
+# prompt adam1
+
+# moving directory
+setopt auto_cd
+setopt auto_pushd
+setopt extended_glob
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+# history
+setopt histignorealldups sharehistory
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt share_history
 
 # Keep 50000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=50000
 SAVEHIST=50000
 HISTFILE=~/.zsh_history
+
+# execute command
+setopt correct
+setopt list_packed
 
 # Use modern completion system
 autoload -Uz compinit
@@ -76,3 +100,27 @@ alias l='ls -CF'
 if type zoxide > /dev/null 2>&1; then
     eval "$(zoxide init zsh)"
 fi
+
+# git
+if [ -f "$HOME"/.git-prompt.sh ]; then
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export GIT_PS1_SHOWUNTRACKEDFILES=true
+    export GIT_PS1_SHOWSTASHSTATE=true
+    export GIT_PS1_SHOWUPSTREAM=auto
+    export GIT_PS1_STATESEPARATOR=" "
+    export GIT_PS1_SHOWCOLORHINTS=true
+    export GIT_PS1_SHOWCONFLICTSTATE="yes"
+    export GIT_PS1_COMPRESSSPARSESTATE=true
+    export GIT_PS1_DESCRIBE_STYLE="branch"
+    source "$HOME"/.git-prompt.sh
+fi
+if [ -f "$HOME"/.zsh/_git ] && [ -f "$HOME"/.git-completion.bash ]; then
+    fpath=(~/.zsh $fpath)
+    zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
+    autoload -Uz compinit && compinit
+fi
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"

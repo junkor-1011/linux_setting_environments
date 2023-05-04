@@ -43,10 +43,10 @@ ENV USER_NAME_DEFAULT=wsl-user
 ARG USER_NAME=wsl-user
 ARG USER_UID=1000
 ARG PASSWD=password
-RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
+RUN useradd -m -s /bin/zsh -u ${USER_UID} ${USER_NAME} && \
     echo "${USER_NAME}:${PASSWD}" | chpasswd && \
     echo "${USER_NAME} ALL=(ALL) ALL" >> /etc/sudoers
-    # echo "wsl-user ALL=NOPASSWD: ALL" >> /etc/sudoers
+    # echo "${USER_NAME} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # for docker
 RUN gpasswd -a ${USER_NAME} docker
@@ -71,6 +71,11 @@ COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
 
 # tmux
 COPY --chown=${USER_NAME}:${USER_NAME} .tmux.conf /home/${USER_NAME}/.tmux.conf
+
+# git
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-prompt.sh /home/${USER_NAME}/.git-prompt.sh
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.bash /home/${USER_NAME}/.git-completion.bash
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/${USER_NAME}/.zsh/_git
 
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
