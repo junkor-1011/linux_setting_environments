@@ -13,15 +13,30 @@ export PS1='[%n@%m %~$(__git_ps1 " (%s)")]
 # promptinit
 # prompt adam1
 
-setopt histignorealldups sharehistory
+# moving directory
+setopt auto_cd
+setopt auto_pushd
+setopt extended_glob
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+# history
+setopt histignorealldups sharehistory
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt share_history
 
 # Keep 50000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=50000
 SAVEHIST=50000
 HISTFILE=~/.zsh_history
+
+# execute command
+setopt correct
+setopt list_packed
 
 # Use modern completion system
 autoload -Uz compinit
@@ -99,3 +114,8 @@ if [ -f "$HOME"/.zsh/_git ] && [ -f "$HOME"/.git-completion.bash ]; then
     zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
     autoload -Uz compinit && compinit
 fi
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
