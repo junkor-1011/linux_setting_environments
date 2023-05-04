@@ -1,8 +1,17 @@
 # Set up the prompt
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+# PS1
+setopt PROMPT_SUBST
+export PS1='[%n@%m %~$(__git_ps1 " (%s)")]
+\$ '
+# show current dir path short:
+# export PS1='[%n@%m %c$(__git_ps1 " (%s)")]
+# \$ '
+
+# --- using theme ---
+# autoload -Uz promptinit
+# promptinit
+# prompt adam1
 
 setopt histignorealldups sharehistory
 
