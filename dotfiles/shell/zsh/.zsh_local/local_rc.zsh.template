@@ -79,6 +79,12 @@ if type go > /dev/null 2>&1; then
     export PATH="$PATH:$GOPATH/bin"
 fi
 
+# sdkman (Java)
+if [ -d "$HOME/.sdkman" ]; then
+    export SDKMAN_DIR="$HOME/.sdkman"
+    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
 # aws-cli(ver2) completion
 if type aws_completer > /dev/null 2>&1; then
     autoload bashcompinit && bashcompinit
