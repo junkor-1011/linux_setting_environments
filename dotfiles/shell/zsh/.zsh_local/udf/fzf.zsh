@@ -102,8 +102,8 @@ vg() {
 #   fi
 # }
 
-# fd - cd to selected directory
-fd() {
+# fd -> fzd - cd to selected directory
+fzd() { # fd -> fzd (because of conflict with fd-find in /usr/bin)
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
