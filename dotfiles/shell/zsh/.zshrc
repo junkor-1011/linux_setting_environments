@@ -47,6 +47,11 @@ setopt list_packed
 bindkey -e  # Emacs
 # bindkey -v  # Vi
 
+# completions
+if [ -d $HOME/.zsh_local/completions ]; then
+    fpath=(~/.zsh_local/completions $fpath)
+    autoload -Uz compinit && compinit -u
+fi
 
 # ---------------------------------- #
 # Plugins
@@ -86,12 +91,6 @@ fi
 # symbolic linkを張って`bash`と`zsh`で共有するなど
 if [ -f $HOME/.zsh_local/local_rc.sh ]; then
    source $HOME/.zsh_local/local_rc.sh
-fi
-
-if [ -d $HOME/.zsh_local/completions ]; then
-    fpath=(~/.zsh_local/completions $fpath)
-    autoload -Uz compinit
-    compinit -u
 fi
 
 # PATHの重複削除 (zsh)
