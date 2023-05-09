@@ -70,13 +70,27 @@ export PATH=$HOME/bin:$PATH
 if type sl > /dev/null 2>&1; then
     alias sl='sl -e'
 fi
-# alias cdk='npx aws-cdk'
-# alias awslocal='aws --endpoint-url=http://localhost:4566 --profile=localstack'
+
+# aws
+## awslocal(for LocalStack)
+if type aws > /dev/null 2>&1; then
+    alias awslocal='aws --endpoint-url=http://localhost:4566 --profile=localstack'
+fi
+## cdk
+if type npx > /dev/null 2>&1; then
+    alias cdk='npx aws-cdk'
+fi
 
 # cat alternative
 if type batcat > /dev/null 2>&1; then
-    alias bat='batcat'
+    # shellcheck disable=SC2139
+    alias bat="$(\which batcat)"
 fi
+
+# AWS SAM
+# if type sam > /dev/null 2>&1; then
+#     export SAM_CLI_TELEMETRY=0
+# fi
 
 # ls alternative
 if type lsd > /dev/null 2>&1; then
@@ -88,6 +102,38 @@ elif type exa > /dev/null 2>&1; then
     alias ll='exa -alF --icons --color=auto'
     alias l='exa -F --icons --color=auto'
 fi
+
+# proxy
+# set_proxy () {
+#     local username
+#     local password
+#     local proxy_host
+#     local proxy_port
+#     local proxy_url
+#     local no_proxy_content
+#     username="xxxxxxx"
+#     password="xxxxxxxx"
+#     proxy_host="proxy.example.com"
+#     proxy_port="80"
+#     proxy_url="http://${username}:${password}@${proxy_host}:${proxy_port}"
+#     no_proxy_content="localhost,127.0.0.1,local.example.com"
+# 
+#     export http_proxy="${proxy_url}"
+#     export https_proxy="${proxy_url}"
+#     export HTTP_PROXY="${proxy_url}"
+#     export HTTPS_PROXY="${proxy_url}"
+#     export no_proxy="${no_proxy_content}"
+#     export NO_PROXY="${no_proxy_content}"
+# }
+# unset_proxy() {
+#     unset http_proxy;
+#     unset https_proxy;
+#     unset HTTP_PROXY;
+#     unset HTTPS_PROXY;
+#     unset no_proxy;
+#     unset NO_PROXY;
+# }
+# set_proxy
 
 # modeline
 # vim: set ft=sh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :
