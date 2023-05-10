@@ -78,4 +78,7 @@ COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.bash /home/
 COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/${USER_NAME}/.zsh/_git
 
 USER ${USER_NAME}
+
+RUN python3 -m pip install pipx --user --no-cache-dir -U
+
 WORKDIR /home/${USER_NAME}

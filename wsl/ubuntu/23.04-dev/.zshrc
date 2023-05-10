@@ -1,12 +1,15 @@
 # Set up the prompt
 
+# PATH
+export PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}"
+
 # PS1
 setopt PROMPT_SUBST
-export PS1='[%n@%m %~$(__git_ps1 " (%s)")]
-\$ '
-# show current dir path short:
-# export PS1='[%n@%m %c$(__git_ps1 " (%s)")]
+# export PS1='[%n@%m %~$(__git_ps1 " (%s)")]
 # \$ '
+# show current dir path short:
+export PS1='[%n@%m %c$(__git_ps1 " (%s)")]
+\$ '
 
 # --- using theme ---
 # autoload -Uz promptinit
@@ -118,6 +121,11 @@ if [ -f "$HOME"/.zsh/_git ] && [ -f "$HOME"/.git-completion.bash ]; then
     fpath=(~/.zsh $fpath)
     zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
     autoload -Uz compinit && compinit
+fi
+
+## pipx
+if type pipx > /dev/null 2>&1; then
+    eval "$(register-python-argcomplete pipx)"
 fi
 
 # XDG
