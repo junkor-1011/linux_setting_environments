@@ -24,6 +24,7 @@ RUN apt-get -y update && \
     bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
     xxd bc gawk binutils \
     whois \
+    make \
     autossh openssl libssl-dev \
     curl wget file \
     git tig \
@@ -39,7 +40,7 @@ RUN apt-get -y update && \
     shellcheck shfmt \
     sudo \
     # ruby \
-    python3 python3-pip python3-venv \
+    python3 python3-pip python3-venv pipx \
     # silversearcher-ag ack \
     # peco \
     fzf bat exa lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide \
@@ -48,7 +49,7 @@ RUN apt-get -y update && \
     xclip xsel x11-apps mesa-utils-extra \
     wl-clipboard \
     pandoc \
-    libfuse2 \
+    fuse libfuse2 \
     podman podman-compose uidmap \
     && \
     # Docker \

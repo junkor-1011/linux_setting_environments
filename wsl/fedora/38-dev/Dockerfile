@@ -24,6 +24,7 @@ RUN dnf update -y && \
     ShellCheck shfmt \
     man-db man-pages \
     python3 python3-pip \
+    pipx \
     # cloud-init \
     git tig \
     git-secrets \

@@ -24,6 +24,7 @@ RUN apt-get -y update && \
     bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
     xxd bc gawk binutils \
     whois \
+    make \
     autossh openssl libssl-dev \
     curl wget file \
     git tig \
@@ -41,6 +42,7 @@ RUN apt-get -y update && \
     sudo \
     # ruby \
     python3 python3-pip python3-venv \
+    # pipx \
     # silversearcher-ag ack \
     # peco \
     fzf bat exa hexyl fd-find htop tldr ncdu ripgrep zoxide \
