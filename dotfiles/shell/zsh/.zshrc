@@ -52,6 +52,7 @@ if [ -d $HOME/.zsh_local/completions ]; then
     fpath=(~/.zsh_local/completions $fpath)
     autoload -Uz compinit && compinit -u
 fi
+autoload -Uz bashcompinit && bashcompinit
 
 # ---------------------------------- #
 # Plugins
@@ -59,7 +60,7 @@ if ([ -d $HOME/.local/share/zinit/zinit.git ] && [ -f $HOME/.zsh_local/zinit_set
     # using zinit
     source $HOME/.zsh_local/zinit_setting.zsh
     # unalias zi=zinit because of conflict with zoxide
-    [ type zi > /dev/null 2>&1 ] && unalias zi
+    type zi > /dev/null 2>&1 && unalias zi
 elif ([ -d $HOME/.zplug ] && [ -f $HOME/.zsh_local/zplug_setting.zsh ]); then
     # using zplug
     source $HOME/.zsh_local/zplug_setting.zsh
