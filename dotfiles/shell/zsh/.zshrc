@@ -58,6 +58,8 @@ fi
 if ([ -d $HOME/.local/share/zinit/zinit.git ] && [ -f $HOME/.zsh_local/zinit_setting.zsh ]); then
     # using zinit
     source $HOME/.zsh_local/zinit_setting.zsh
+    # unalias zi=zinit because of conflict with zoxide
+    [ type zi > /dev/null 2>&1 ] && unalias zi
 elif ([ -d $HOME/.zplug ] && [ -f $HOME/.zsh_local/zplug_setting.zsh ]); then
     # using zplug
     source $HOME/.zsh_local/zplug_setting.zsh
