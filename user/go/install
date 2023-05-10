@@ -22,8 +22,8 @@ curl -LO "https://golang.org/dl/${PACKAGE_TGZ}"
 rm -rf "${INSTALL_PATH}/go"
 tar -C "${INSTALL_PATH}" -xzf "${PACKAGE_TGZ}"
 
-for filepath in ${INSTALL_PATH}/go/bin/*; do
-    array=("$(echo "${filepath}" | tr "/" " ")")
+for filepath in "${INSTALL_PATH}/go/bin"/*; do
+    array=( $(echo "${filepath}" | tr "/" " ") ) # <- do NOT quote to split (TMP)
     file="${array[$((${#array[@]}-1))]}"
 
     ln -sfv "${filepath}" "${EXECUTE_PATH}/${file}"
