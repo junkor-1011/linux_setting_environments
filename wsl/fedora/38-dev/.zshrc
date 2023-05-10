@@ -42,8 +42,7 @@ setopt correct
 setopt list_packed
 
 # Use modern completion system
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -120,6 +119,7 @@ fi
 
 ## pipx
 if type pipx > /dev/null 2>&1; then
+    autoload -Uz bashcompinit && bashcompinit
     eval "$(register-python-argcomplete pipx)"
 fi
 
