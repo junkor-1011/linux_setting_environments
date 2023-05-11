@@ -12,6 +12,7 @@ RUN apt-get -y update && \
     yes | unminimize && \
     # add packages \
     apt-get install -y --no-install-recommends \
+    ubuntu-advantage-tools \
     # build-essential \
     command-not-found \
     zip unzip bzip2 xz-utils \
