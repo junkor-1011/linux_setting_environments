@@ -13,6 +13,7 @@ RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
     # build-essential \
     command-not-found \
+    less \
     zip unzip bzip2 xz-utils \
     p7zip-full \
     unrar-free \

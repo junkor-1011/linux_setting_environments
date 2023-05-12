@@ -15,6 +15,7 @@ RUN apt-get -y update && \
     ubuntu-advantage-tools \
     # build-essential \
     command-not-found \
+    less \
     zip unzip bzip2 xz-utils \
     p7zip-full unrar \
     nkf dos2unix \
