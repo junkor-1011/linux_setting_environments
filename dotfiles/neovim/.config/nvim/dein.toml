@@ -17,9 +17,9 @@ repo = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
 hook_add = '''
 source ~/.config/nvim/plugins_dein/vim-airline.vim
-" default theme: dark
-let g:airline_theme = 'dark'
-"let g:airline_theme = 'molokai'
+" default theme: simple
+let g:airline_theme = 'simple'
+" let g:airline_theme = 'dark'
 " let g:airline_powerline_fonts = 1
 '''
 
