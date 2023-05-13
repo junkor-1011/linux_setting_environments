@@ -186,3 +186,7 @@ repo = 'kamykn/spelunker.vim'
 # prisma
 [[plugins]]
 repo = 'pantharshit00/vim-prisma'
+
+# editor config
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
