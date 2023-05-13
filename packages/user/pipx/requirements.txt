@@ -1,0 +1,14 @@
+# pip user install requirement packages
+# pynvim
+pipenv
+poetry
+pre-commit
+yamllint
+restructuredtext_lint
+# pandoc
+vim-vint
+yq
+# python-language-server
+
+# podman
+podman-compose
