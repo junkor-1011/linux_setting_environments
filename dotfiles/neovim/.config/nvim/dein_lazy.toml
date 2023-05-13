@@ -23,12 +23,6 @@ source ~/.config/nvim/plugins_dein/defx.vim
 # Fern
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
-depends = [
-    'fern-renderer-nerdfont.vim',
-    'fern-git-status.vim',
-    'fern-mapping-git.vim',
-    'nerdfont.vim',
-]
 on_cmd = 'Fern'
 hook_add = '''
 nnoremap <silent> <Leader>d :<C-u> Fern . -drawer -toggle <CR>
@@ -36,15 +30,19 @@ nnoremap <silent> <Leader>d :<C-u> Fern . -drawer -toggle <CR>
 
 [[plugins]]
 repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = ['nerdfont.vim']
+on_source = ['fern.vim']
 hook_source = '''
 let g:fern#renderer = "nerdfont"
 '''
 
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
+on_source = ['fern.vim']
 
 [[plugins]]
 repo = 'lambdalisue/fern-mapping-git.vim'
+on_source = ['fern.vim']
 
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
