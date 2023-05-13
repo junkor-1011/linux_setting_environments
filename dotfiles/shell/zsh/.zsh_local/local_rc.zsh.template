@@ -82,6 +82,13 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
+## deno ##
+if [ -d "${HOME}"/.deno ]; then
+    export DENO_INSTALL="${HOME}/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+    eval "$(deno completions zsh)"
+fi
+
 # golang
 if type go > /dev/null 2>&1; then
     export GOPATH="$(go env GOPATH)"

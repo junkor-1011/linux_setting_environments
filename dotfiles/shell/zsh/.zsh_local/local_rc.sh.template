@@ -22,22 +22,6 @@ fi
 # PROMPT
 # type set_prompt_hostname > /dev/null 2>&1 && set_prompt_hostname
 
-## deno ##
-if [ -d ${HOME}/.deno ]; then
-    export DENO_INSTALL="${HOME}/.deno"
-    export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
-## Go ##
-type go >> /dev/null 2>&1
-result_tmp=$?
-if [ ${result_tmp} -ne 0 ];then
-    export GOPATH=${HOME}/.go
-elif [ -x /usr/local/go/bin/go ]; then
-    export PATH=/usr/local/go/bin:${PATH}
-    export GOPATH=${HOME}/.go
-fi
-
 ## Rust
 if [ -f "${HOME}/.cargo/env" ];then
     source "${HOME}/.cargo/env"
