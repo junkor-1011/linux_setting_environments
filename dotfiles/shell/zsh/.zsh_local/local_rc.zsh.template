@@ -62,9 +62,9 @@ else
 fi
 
 # nvm
-if [ -d "${HOME}/.nvm" ]; then
+if [ -f "${HOME}/.nvm/nvm.sh" ]; then
     export NVM_DIR="$HOME/.nvm"
-elif [ -d "${XDG_CONFIG_HOME}/nvm" ]; then
+elif [ -f "${XDG_CONFIG_HOME}/nvm/nvm.sh" ]; then
     export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 fi
 if [ -d "${NVM_DIR}" ]; then
