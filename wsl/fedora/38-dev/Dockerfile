@@ -36,6 +36,8 @@ RUN dnf update -y && \
     wl-clipboard \
     podman podman-compose \
     dnf-plugins-core \
+    # langpacks for locale \
+    langpacks-en langpacks-ja \
     && \
     dnf reinstall -y shadow-utils \
     && \
