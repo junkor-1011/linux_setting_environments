@@ -79,6 +79,22 @@ elif type exa > /dev/null 2>&1; then
     alias l='exa -F --icons --color=auto'
 fi
 
+# python http.server
+pysrv () {
+    local _PYTHON
+
+    if type python3 > /dev/null 2>&1; then
+        _PYTHON="$(\which python3)"
+    elif type python > /dev/null 2>&1; then
+        _PYTHON="$(\which python)"
+    else
+        echo "ERROR: could not find python."
+    fi
+
+    echo "${_PYTHON}" -m http.server --bind=localhost
+    "${_PYTHON}" -m http.server --bind=localhost "$@"
+}
+
 # proxy
 # set_proxy () {
 #     local username
