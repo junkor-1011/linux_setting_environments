@@ -40,6 +40,11 @@ if type pipx > /dev/null 2>&1; then
     eval "$(register-python-argcomplete pipx)"
 fi
 
+## rye
+if [ -f "${HOME}/.rye/env" ]; then
+    source "${HOME}/.rye/env"
+fi
+
 ## user-original ##
 export PATH=$HOME/bin:$PATH
 
