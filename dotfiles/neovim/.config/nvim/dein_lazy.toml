@@ -97,7 +97,7 @@ on_source = ['ddc.vim']
 [[plugins]]
 repo = 'shun/ddc-source-vim-lsp'
 on_source = ['ddc.vim']
-depends = ['vim-lsp.vim']
+depends = ['vim-lsp']
 
 # Deoplete
 # [[plugins]]
