@@ -1,4 +1,4 @@
-FROM docker.io/library/fedora:37
+FROM docker.io/library/fedora:39
 
 USER root
 # for man
@@ -24,17 +24,21 @@ RUN dnf update -y && \
     ShellCheck shfmt \
     man-db man-pages \
     python3 python3-pip \
+    pipx \
     # cloud-init \
     git tig \
     git-secrets \
     tree jq multitail expect \
-    fzf exa lsd hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
+    fzf lsd hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
+    # exa \
     hadolint \
     fuse \
     xclip xsel xeyes \
     wl-clipboard \
     podman podman-compose \
     dnf-plugins-core \
+    # langpacks for locale \
+    langpacks-en langpacks-ja \
     && \
     dnf reinstall -y shadow-utils \
     && \
@@ -68,6 +72,17 @@ RUN sed -i -e "s|${USER_NAME_DEFAULT}|${USER_NAME}|g" /etc/wsl.conf
 
 # git
 COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
+
+# zshrc
+COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
+
+# tmux
+COPY --chown=${USER_NAME}:${USER_NAME} .tmux.conf /home/${USER_NAME}/.tmux.conf
+
+# git
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-prompt.sh /home/${USER_NAME}/.git-prompt.sh
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.bash /home/${USER_NAME}/.git-completion.bash
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/${USER_NAME}/.zsh/_git
 
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
