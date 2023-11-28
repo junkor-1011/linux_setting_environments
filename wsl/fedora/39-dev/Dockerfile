@@ -32,7 +32,7 @@ RUN dnf update -y && \
     fzf lsd hexyl fd-find bat ripgrep duf procs htop ncdu tldr zoxide \
     # exa \
     hadolint \
-    fuse \
+    fuse fuse-libs \
     xclip xsel xeyes \
     wl-clipboard \
     podman podman-compose \
