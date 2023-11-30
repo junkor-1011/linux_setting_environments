@@ -78,6 +78,10 @@ if type lsd > /dev/null 2>&1; then
     alias la='lsd -AF'
     alias ll='lsd -alF'
     alias l='lsd -F'
+elif type eza > /dev/null 2>&1; then
+    alias la='eza -aF --icons --color=auto'
+    alias ll='eza -alF --icons --color=auto'
+    alias l='eza -F --icons --color=auto'
 elif type exa > /dev/null 2>&1; then
     alias la='exa -aF --icons --color=auto'
     alias ll='exa -alF --icons --color=auto'
