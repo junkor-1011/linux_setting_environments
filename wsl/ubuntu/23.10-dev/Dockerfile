@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:lunar
+FROM docker.io/library/ubuntu:mantic
 
 USER root
 

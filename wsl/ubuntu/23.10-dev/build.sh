@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 
-TAG="ubuntu-lunar-dev"
+TAG="ubuntu-mantic-dev"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"
