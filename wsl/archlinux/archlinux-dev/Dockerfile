@@ -26,7 +26,7 @@ RUN pacman -Syyu --noconfirm && \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipenv python-poetry python-pipx \
     git tig \
-    exa lsd fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide \
+    eza lsd fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide git-delta \
     fuse \
     # cloud-init \
     xorg-xeyes xclip wl-clipboard \
