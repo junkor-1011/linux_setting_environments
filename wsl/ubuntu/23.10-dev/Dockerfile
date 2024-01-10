@@ -45,7 +45,8 @@ RUN apt-get -y update && \
     python3 python3-pip python3-venv pipx \
     # silversearcher-ag ack \
     # peco \
-    fzf bat eza lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide git-delta \
+    fzf bat exa lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide git-delta \
+    # eza \
     # global exuberant-ctags \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
