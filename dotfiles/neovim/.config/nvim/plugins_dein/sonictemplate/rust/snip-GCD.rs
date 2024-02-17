@@ -1,4 +1,5 @@
-fn gcd(m: i32, n: i32) -> i32 {
+type Int = i32; // EDIT
+fn gcd(m: Int, n: Int) -> Int {
     if n == 0 {
         return m;
     } else {
