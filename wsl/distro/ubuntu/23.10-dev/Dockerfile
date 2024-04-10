@@ -14,6 +14,7 @@ RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
     ubuntu-advantage-tools \
     # build-essential \
+    qemu-user-static \
     command-not-found \
     less \
     zip unzip bzip2 xz-utils \
