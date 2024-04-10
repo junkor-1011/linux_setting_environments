@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eu
+set -eux
 
 TAG="archlinux-dev"
 
@@ -18,7 +18,7 @@ if [ ! -f ./git-completion/git-completion.zsh ]; then
 fi
 
 # tmux
-cp ../../../dotfiles/tmux/.tmux.conf .
+cp ../../../../dotfiles/tmux/.tmux.conf .
 
 if [ "$1" = "podman" ]; then
     podman build -t "$TAG" .

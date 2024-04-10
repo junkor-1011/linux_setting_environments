@@ -35,6 +35,7 @@ RUN pacman -Syyu --noconfirm && \
     fuse-overlayfs \
     iptables \
     docker docker-compose \
+    docker-buildx qemu-user-static \
     podman podman-compose \
     && \
     pacman -Scc && \
