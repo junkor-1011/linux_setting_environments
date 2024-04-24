@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:kinetic
+FROM docker.io/library/ubuntu:noble
 
 USER root
 
@@ -12,8 +12,11 @@ RUN apt-get -y update && \
     yes | unminimize && \
     # add packages \
     apt-get install -y --no-install-recommends \
+    ubuntu-advantage-tools \
     # build-essential \
+    qemu-user-static \
     command-not-found \
+    less \
     zip unzip bzip2 xz-utils \
     p7zip-full unrar \
     nkf dos2unix \
@@ -21,9 +24,11 @@ RUN apt-get -y update && \
     tree \
     jq \
     nano vim emacs \
+    neovim \
     bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
     xxd bc gawk binutils \
     whois \
+    make \
     autossh openssl libssl-dev \
     curl wget file \
     git tig \
@@ -35,20 +40,21 @@ RUN apt-get -y update && \
     fonts-ipafont \
     locales \
     expect \
-    tmux bash zsh fish \
+    tmux bash zsh \
+    # fish \
     shellcheck shfmt \
     sudo \
     # ruby \
-    python3 python3-pip python3-venv \
+    python3 python3-pip python3-venv pipx \
     # silversearcher-ag ack \
     # peco \
-    fzf bat exa hexyl fd-find duf htop tldr ncdu ripgrep zoxide \
+    fzf bat eza lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide git-delta \
     # global exuberant-ctags \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
     wl-clipboard \
     pandoc \
-    libfuse2 \
+    fuse libfuse2 \
     podman podman-compose uidmap \
     && \
     # Docker \
@@ -78,6 +84,13 @@ RUN systemctl enable docker
 # apt conf
 COPY apt.conf.d/ /etc/apt/apt.conf.d/
 
+# change original user(ubuntu)'s uid/gid
+ARG ORIGINAL_USER_UID_ALT=2000
+ARG ORIGINAL_USER_GID_ALT=2000
+RUN usermod -u ${ORIGINAL_USER_UID_ALT} ubuntu && \
+    groupmod -g ${ORIGINAL_USER_GID_ALT} ubuntu && \
+    chown -R ubuntu:ubuntu /home/ubuntu
+
 # create user
 ENV USER_NAME_DEFAULT=wsl-user
 ARG USER_NAME=wsl-user
@@ -102,5 +115,31 @@ RUN sed -i -e "s|${USER_NAME_DEFAULT}|${USER_NAME}|g" /etc/wsl.conf
 # git
 COPY --chown=${USER_NAME}:${USER_NAME} gitconfig /home/${USER_NAME}/.gitconfig
 
+# zsh
+COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
+
+# tmux
+COPY --chown=${USER_NAME}:${USER_NAME} .tmux.conf /home/${USER_NAME}/.tmux.conf
+
+# git
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-prompt.sh /home/${USER_NAME}/.git-prompt.sh
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.bash /home/${USER_NAME}/.git-completion.bash
+COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/${USER_NAME}/.zsh/_git
+
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
+
+# SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
+#
+# # Rust
+# RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#
+# # deno
+# RUN curl -fsSL https://deno.land/install.sh | sh
+#
+# # nvm
+# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+#
+# # rye
+# RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash && \
+#     ./.rye/shims/rye config --set-bool behavior.use-uv=true
