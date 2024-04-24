@@ -8,7 +8,8 @@ RUN sed -i -e 's/tsflags/# tsflags/g' /etc/dnf/dnf.conf
 RUN dnf update -y && \
     # add packages \
     dnf install -y \
-    nano vim neovim \
+    nano vim \
+    # neovim \
     sudo passwd \
     openssh openssh-clients autossh \
     net-tools iproute iputils hostname gnutls bind-utils nmap nc \
