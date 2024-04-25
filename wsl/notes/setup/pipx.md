@@ -22,3 +22,8 @@ pipx upgrade-all
 - [pyright](https://github.com/microsoft/pyright)
 - [vim-vint](https://github.com/Vimjas/vint)
 - [yamllint](https://github.com/adrienverge/yamllint)
+
+### Rust-Binding
+
+- [maturin](https://github.com/PyO3/maturin)
+    - PyO3/maturin
