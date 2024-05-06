@@ -53,6 +53,7 @@ RUN apt-get -y update && \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
     wl-clipboard \
+    waypipe \
     pandoc \
     fuse libfuse2 \
     podman podman-compose uidmap \

@@ -38,6 +38,7 @@ RUN dnf update -y && \
     fuse fuse-libs \
     xclip xsel xeyes \
     wl-clipboard \
+    waypipe \
     podman podman-compose \
     dnf-plugins-core \
     qemu-user-static \
