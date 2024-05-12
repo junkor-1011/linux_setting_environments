@@ -16,4 +16,10 @@ else
     echo "PASS(already exist local_rc.zsh)"
 fi
 
-echo "Finished: cp local_rc.sh & local_rc.zsh"
+if [ ! -f .zsh_local/p10k.zsh ]; then
+    cp .zsh_local/p10k_example.zsh .zsh_local/p10k.zsh
+else
+    echo "PASS(already exist p10k.zsh)"
+fi
+
+echo "Finished: cp local_rc.sh & local_rc.zsh & p10k_example"
