@@ -74,10 +74,6 @@ fi
 
 export PATH=$HOME/.local/bin:$PATH
 
-# fzf auto-generated
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 # user define functions
 if [ -f $HOME/.zsh_local/udf.zsh ]; then
     source $HOME/.zsh_local/udf.zsh
