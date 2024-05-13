@@ -42,6 +42,8 @@ RUN dnf update -y && \
     podman podman-compose \
     dnf-plugins-core \
     qemu-user-static \
+    # qemu-img \
+    # genisoimage \
     ## langpacks for locale \
     langpacks-en langpacks-ja \
     && \
