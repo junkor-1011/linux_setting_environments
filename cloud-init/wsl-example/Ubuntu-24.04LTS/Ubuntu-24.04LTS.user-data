@@ -1,0 +1,13 @@
+#cloud-config
+users:
+  - name: user1
+    groups: adm, sudo
+    sudo:
+      - ALL=(ALL) NOPASSWD:ALL
+  - name: user2
+    groups: adm, sudo
+packages:
+  - htop
+  - fzf
+  - duf
+  - bat
