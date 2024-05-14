@@ -1,4 +1,4 @@
 #!/bin/sh
-set -eu
+set -euxo pipefail
 
 {{_cursor_}}
