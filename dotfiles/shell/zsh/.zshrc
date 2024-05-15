@@ -92,6 +92,9 @@ if [ -f $HOME/.zsh_local/local_rc.sh ]; then
    source $HOME/.zsh_local/local_rc.sh
 fi
 
+# fzf (auto generated)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # PATHの重複削除 (zsh)
 typeset -U path PATH
 
