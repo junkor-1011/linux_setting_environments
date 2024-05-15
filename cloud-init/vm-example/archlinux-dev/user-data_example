@@ -10,9 +10,11 @@ users:
       - ssh-ed25519 ssh-key
     shell: /usr/bin/bash
     sudo: ALL=(ALL) ALL
+    groups: [wheel, users, sudo, adm]
     uid: 1000
   - name: vm-user2
     sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: [wheel, users, sudo, adm]
     uid: 1001
 
 package_update: true
