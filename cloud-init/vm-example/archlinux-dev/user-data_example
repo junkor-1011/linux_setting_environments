@@ -1,0 +1,93 @@
+#cloud-config
+timezone: Asia/Tokyo
+locale: en_US.utf8
+chpasswd: {expire: True}
+ssh_pwauth: False
+disable_root: True
+users:
+  - name: vm-user
+    ssh_authorized_keys:
+      - ssh-ed25519 ssh-key
+    shell: /usr/bin/bash
+    sudo: ALL=(ALL) ALL
+    uid: 1000
+  - name: vm-user2
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    uid: 1001
+
+package_update: true
+package_upgrade: true
+packages:
+  - tmux
+  - bash
+  - bash-completion
+  - zsh
+  - zsh-completion
+  - man-db
+  - man-pages
+  # - sudo
+  - coreutils
+  - which
+  - less
+  - wget
+  - binutils
+  - whois
+  - openssh
+  - autossh
+  - tree
+  - jq
+  - expect
+  - shellcheck
+  - shfmt
+  - nano
+  - vim
+  - neovim
+  - make
+  - base-devel
+  - zig
+  - fontconfig
+  - dnsutils
+  - iproute2
+  - net-tools
+  - traceroute
+  - dos2unix
+  - unrar-free
+  - p7zip
+  - python-pip
+  - python-pipx
+  - git
+  - tig
+  - eza
+  - lsd
+  - fzf
+  - procs
+  - bat
+  - hexyl
+  - fd
+  - ripgrep
+  - duf
+  - htop
+  - ncdu
+  - tldr
+  - zoxide
+  - git-delta
+  - xorg-xeyes
+  - xclip
+  - xsel
+  # - wl-clipboard
+  - fuse
+  - fuse-overlayfs
+  - iptables
+  - docker
+  - docker-compose
+  - docker-buildx
+  - qemu-user-static
+  - podman
+  - podman-compose
+
+runcmd:
+- sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
+- sed -i -e 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+- systemctl reload ssh
+
+# vim: set ft=yaml ff=unix expandtab ts=2 sw=2
