@@ -64,6 +64,9 @@ systemctl stop reflector.service
 - https://wiki.archlinux.jp/index.php/Archinstall
 - https://github.com/archlinux/archinstall
 - https://github.com/archlinux/archinstall/issues/1852
+- https://wiki.archlinux.jp/index.php/Xorg
+    - `xorg-server`, `xorg-apps`
+    - `xf86-video-fbdev`, `xf86-video-vesa`
 - https://gifnksm.hatenablog.jp/entry/2022/07/30/190419
 - https://zenn.dev/usagiga/scraps/07cc37e277e54e
 - [NoCloud (seed.iso) cloud-init configuration for Amazon Linux 2023 on KVM and VMware](https://docs.aws.amazon.com/linux/al2023/ug/seed-iso.html)

@@ -86,10 +86,12 @@ packages:
   - qemu-user-static
   - podman
   - podman-compose
+  - trivy
 
 runcmd:
 - sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
 - sed -i -e 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+- sed -i -e 's/^#X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 - systemctl reload ssh
 
 # vim: set ft=yaml ff=unix expandtab ts=2 sw=2
