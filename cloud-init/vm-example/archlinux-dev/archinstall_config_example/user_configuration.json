@@ -1,0 +1,137 @@
+{
+    "additional-repositories": [],
+    "archinstall-language": "English",
+    "bootloader": "Systemd-boot",
+    "config_version": "2.8.0",
+    "debug": false,
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/sda",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "Boot",
+                            "ESP"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "e03f85d5-76a6-431d-865b-94f7b44c5aca",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "GiB",
+                            "value": 1
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "ext4",
+                        "mount_options": [],
+                        "mountpoint": "/",
+                        "obj_id": "fbd183f7-5d14-4848-88fd-6d66a1de695b",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 135289372672
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 1074790400
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "hostname": "archlinux",
+    "kernels": [
+        "linux"
+    ],
+    "locale_config": {
+        "kb_layout": "jp106",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "custom_mirrors": [],
+        "mirror_regions": {
+            "Japan": [
+                "https://repo.jing.rocks/archlinux/$repo/os/$arch",
+                "https://mirrors.cat.net/archlinux/$repo/os/$arch",
+                "https://mirror.nishi.network/archlinux/$repo/os/$arch",
+                "https://jp.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "https://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch",
+                "http://repo.jing.rocks/archlinux/$repo/os/$arch",
+                "http://mirrors.cat.net/archlinux/$repo/os/$arch",
+                "http://mirror.nishi.network/archlinux/$repo/os/$arch",
+                "http://jp.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/$repo/os/$arch",
+                "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch"
+            ]
+        }
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": false,
+    "packages": [
+        "cloud-init",
+        "cloud-guest-utils",
+        "xorg-xeyes",
+        "less",
+        "vim"
+    ],
+    "parallel downloads": 0,
+    "profile_config": {
+        "gfx_driver": null,
+        "greeter": null,
+        "profile": {
+            "custom_settings": {
+                "sshd": {}
+            },
+            "details": [
+                "sshd"
+            ],
+            "main": "Server"
+        }
+    },
+    "script": "guided",
+    "silent": false,
+    "skip_ntp": false,
+    "skip_version_check": false,
+    "swap": true,
+    "timezone": "Asia/Tokyo",
+    "uki": false,
+    "version": "2.8.0"
+}
