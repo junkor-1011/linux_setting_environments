@@ -20,7 +20,7 @@
                         "fs_type": "fat32",
                         "mount_options": [],
                         "mountpoint": "/boot",
-                        "obj_id": "e03f85d5-76a6-431d-865b-94f7b44c5aca",
+                        "obj_id": "3b4ec8de-de11-4f68-948a-3291f66f5f40",
                         "size": {
                             "sector_size": {
                                 "unit": "B",
@@ -47,7 +47,7 @@
                         "fs_type": "ext4",
                         "mount_options": [],
                         "mountpoint": "/",
-                        "obj_id": "fbd183f7-5d14-4848-88fd-6d66a1de695b",
+                        "obj_id": "684478c7-f3f5-4cf8-ba7d-cc286863c352",
                         "size": {
                             "sector_size": {
                                 "unit": "B",
@@ -108,9 +108,13 @@
     "packages": [
         "cloud-init",
         "cloud-guest-utils",
+        "xf86-video-fbdev",
+        "xorg-server",
+        "xorg-apps",
         "xorg-xeyes",
         "less",
-        "vim"
+        "vim",
+        "nano"
     ],
     "parallel downloads": 0,
     "profile_config": {

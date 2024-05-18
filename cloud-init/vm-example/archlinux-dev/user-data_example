@@ -1,7 +1,7 @@
 #cloud-config
 timezone: Asia/Tokyo
 locale: en_US.utf8
-chpasswd: {expire: True}
+# chpasswd: {expire: True}
 ssh_pwauth: False
 disable_root: True
 users:
@@ -89,7 +89,7 @@ packages:
   - trivy
 
 runcmd:
-- sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
+# - sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
 - sed -i -e 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 - sed -i -e 's/^#X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 - systemctl reload ssh
