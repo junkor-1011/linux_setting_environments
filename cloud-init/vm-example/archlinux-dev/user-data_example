@@ -24,7 +24,7 @@ packages:
   - bash
   - bash-completion
   - zsh
-  - zsh-completion
+  - zsh-completions
   - man-db
   - man-pages
   # - sudo
