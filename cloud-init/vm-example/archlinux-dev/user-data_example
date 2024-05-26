@@ -48,6 +48,7 @@ packages:
   - base-devel
   - zig
   - fontconfig
+  - openbsd-netcat
   - dnsutils
   - iproute2
   - net-tools

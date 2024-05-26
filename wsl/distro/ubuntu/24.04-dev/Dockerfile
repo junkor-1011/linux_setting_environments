@@ -28,6 +28,7 @@ RUN apt-get -y update && \
     nano vim emacs \
     # neovim \
     bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
+    netcat-openbsd ncat \
     xxd bc gawk binutils \
     whois \
     make \
