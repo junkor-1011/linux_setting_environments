@@ -69,6 +69,10 @@ cargo install-update --all # upgrade all
 
 - [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit)
 
+#### License
+
+- [cargo-license](https://github.com/onur/cargo-license)
+
 #### AWS
 
 - [cargo-lambda](https://github.com/cargo-lambda/cargo-lambda)
