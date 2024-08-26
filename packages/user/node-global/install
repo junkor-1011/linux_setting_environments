@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euo pipefail
 
 # NPM_VERSION="$(curl --silent "https://raw.githubusercontent.com/npm/cli/latest/package.json" | jq .version | sed -e "s/\"//g")"
