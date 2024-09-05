@@ -101,6 +101,11 @@ if [ -d "$HOME/.sdkman" ]; then
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# coursier (Scala)
+if [ -d "${HOME}/.local/share/coursier/bin" ]; then
+    export PATH="${HOME}/.local/share/coursier/bin:${PATH}"
+fi
+
 # aws-cli(ver2) completion
 if type aws_completer > /dev/null 2>&1; then
     autoload bashcompinit && bashcompinit
