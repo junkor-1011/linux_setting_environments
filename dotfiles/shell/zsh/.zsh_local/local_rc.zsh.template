@@ -106,6 +106,12 @@ if [ -d "${HOME}/.local/share/coursier/bin" ]; then
     export PATH="${HOME}/.local/share/coursier/bin:${PATH}"
 fi
 
+# dotnet
+if [ -d "${HOME}/.dotnet" ]; then
+    export PATH="${HOME}/.dotnet:${PATH}"
+fi
+
+
 # aws-cli(ver2) completion
 if type aws_completer > /dev/null 2>&1; then
     autoload bashcompinit && bashcompinit
