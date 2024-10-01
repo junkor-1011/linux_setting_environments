@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+
+# get script path
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
+
+VERSION="v$(curl --silent "https://api.github.com/repos/duckdb/duckdb/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
+OS=linux
+CPU_ARCH="amd64"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+ZIPFILE="duckdb_cli-${OS}-${CPU_ARCH}.zip"
+DOWNLOAD_URL="https://github.com/duckdb/duckdb/releases/download/${VERSION}/${ZIPFILE}"
+
+WORK_DIR="__TMP__"
+if [ -d "${WORK_DIR}" ]; then
+    rm -rf "${WORK_DIR}"
+fi
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -LO "${DOWNLOAD_URL}"
+# extract "duckdb" binary
+unzip "${ZIPFILE}"
+mv ./duckdb "${INSTALL_PATH}/duckdb"
+ln -sfv "${INSTALL_PATH}/duckdb" "${EXECTIVE_PATH}/duckdb"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
+
+echo "duckdb ${VERSION} has been installed."
+echo "(Please check update by yourself.)"
