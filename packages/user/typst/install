@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+
+# get script path
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR"
+
+VERSION="v$(curl --silent "https://api.github.com/repos/typst/typst/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
+OS=linux
+CPU_ARCH="x86_64"
+
+INSTALL_PATH="${HOME}/LocalApps"
+EXECTIVE_PATH="${HOME}/bin"
+
+PACKAGE_DIRNAME="typst-${CPU_ARCH}-unknown-${OS}-musl"
+DOWNLOAD_FILE="${PACKAGE_DIRNAME}.tar.xz"
+DOWNLOAD_URL="https://github.com/typst/typst/releases/download/${VERSION}/${DOWNLOAD_FILE}"
+
+WORK_DIR="__TMP__"
+if [ -d "${WORK_DIR}" ]; then
+    rm -rf "${WORK_DIR}"
+fi
+mkdir "${WORK_DIR}"
+cd "${WORK_DIR}"
+curl -LO "${DOWNLOAD_URL}"
+# extract "typst" binary
+tar xvf "${DOWNLOAD_FILE}"
+mv "./${PACKAGE_DIRNAME}/typst" "${INSTALL_PATH}/typst"
+ln -sfv "${INSTALL_PATH}/typst" "${EXECTIVE_PATH}/typst"
+
+# cleanup
+cd ..
+rm -rf "${WORK_DIR}"
+
+echo "typst ${VERSION} has been installed."
+echo "(Please check update by yourself.)"
