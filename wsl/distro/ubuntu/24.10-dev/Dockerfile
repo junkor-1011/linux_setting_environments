@@ -144,8 +144,7 @@ WORKDIR /home/${USER_NAME}
 # RUN curl -fsSL https://deno.land/install.sh | sh
 #
 # # nvm
-# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 #
-# # rye
-# RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash && \
-#     ./.rye/shims/rye config --set-bool behavior.use-uv=true
+# # uv
+# RUN curl -LsSf https://astral.sh/uv/install.sh | bash
