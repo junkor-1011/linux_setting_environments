@@ -105,8 +105,8 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # deno
 RUN curl -fsSL https://deno.land/install.sh | sh
 
-# nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# fnm
+RUN curl -fsSL https://fnm.vercel.app/install | bash
 
 # uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | bash
