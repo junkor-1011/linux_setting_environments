@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:mantic
+FROM docker.io/library/ubuntu:oracular
 
 USER root
 
@@ -9,12 +9,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN rm /etc/apt/apt.conf.d/docker-*
 
 RUN apt-get -y update && \
+    apt-get install -y --no-install-recommends unminimize && \
     yes | unminimize && \
     # add packages \
     apt-get install -y --no-install-recommends \
     ubuntu-advantage-tools \
-    # build-essential \
+    # build-essential llvm \
+    # mingw-w64 \
     qemu-user-static \
+    # qemu-utils \
+    # genisoimage \
     command-not-found \
     less \
     zip unzip bzip2 xz-utils \
@@ -24,7 +28,9 @@ RUN apt-get -y update && \
     tree \
     jq \
     nano vim emacs \
+    # neovim \
     bind9-dnsutils net-tools iproute2 iputils-ping iputils-clockdiff iputils-arping \
+    netcat-openbsd ncat \
     xxd bc gawk binutils \
     whois \
     make \
@@ -39,19 +45,20 @@ RUN apt-get -y update && \
     fonts-ipafont \
     locales \
     expect \
-    tmux bash zsh fish \
+    tmux bash zsh \
+    # fish \
     shellcheck shfmt \
     sudo \
     # ruby \
     python3 python3-pip python3-venv pipx \
     # silversearcher-ag ack \
     # peco \
-    fzf bat exa lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide git-delta \
-    # eza \
+    fzf bat eza lsd hexyl fd-find duf htop tldr ncdu ripgrep zoxide git-delta \
     # global exuberant-ctags \
     xauth \
     xclip xsel x11-apps mesa-utils-extra \
     wl-clipboard \
+    waypipe \
     pandoc \
     fuse libfuse2 \
     podman podman-compose uidmap \
@@ -127,3 +134,18 @@ COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/$
 
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
+
+# SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
+#
+# # Rust
+# RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#
+# # deno
+# RUN curl -fsSL https://deno.land/install.sh | sh
+#
+# # nvm
+# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+#
+# # rye
+# RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash && \
+#     ./.rye/shims/rye config --set-bool behavior.use-uv=true
