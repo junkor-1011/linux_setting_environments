@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -eu
+set -euo pipefail
 
-TAG="fedora39-dev"
+TAG="fedora41-dev"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"

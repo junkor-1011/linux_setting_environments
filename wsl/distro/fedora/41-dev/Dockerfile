@@ -1,4 +1,4 @@
-FROM docker.io/library/fedora:39
+FROM docker.io/library/fedora:41
 
 USER root
 # for man
@@ -7,7 +7,9 @@ RUN sed -i -e 's/tsflags/# tsflags/g' /etc/dnf/dnf.conf
 # install packages
 RUN dnf update -y && \
     # add packages \
-    dnf install -y nano vim \
+    dnf install -y \
+    nano vim \
+    # neovim \
     sudo passwd \
     openssh openssh-clients autossh \
     net-tools iproute iputils hostname gnutls bind-utils nmap nc \
@@ -19,7 +21,9 @@ RUN dnf update -y && \
     bc gawk binutils \
     util-linux-user \
     cracklib-dicts \
-    bash zsh tcsh fish tmux \
+    bash zsh \
+    # tcsh fish \
+    tmux \
     bash-completion \
     ShellCheck shfmt \
     man-db man-pages \
@@ -34,17 +38,24 @@ RUN dnf update -y && \
     fuse fuse-libs \
     xclip xsel xeyes \
     wl-clipboard \
+    waypipe \
     podman podman-compose \
     dnf-plugins-core \
-    # langpacks for locale \
+    qemu-user-static \
+    # qemu-img \
+    # genisoimage \
+    ## langpacks for locale \
     langpacks-en langpacks-ja \
     && \
     dnf reinstall -y shadow-utils \
     && \
-    # docker-ce \
-    dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
+    ## docker-ce \
+    dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo && \
     dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
-    # cache clear \
+    ## Developer Tools \
+    # dnf groupinstall "Development Tools" && \
+    # dnf install llvm \
+    ## cache clear \
     dnf clean all && \
     rm -rf /var/cache/yum && \
     rm -rf /var/cache/dnf
@@ -85,3 +96,17 @@ COPY --chown=${USER_NAME}:${USER_NAME} git-completion/git-completion.zsh /home/$
 
 USER ${USER_NAME}
 WORKDIR /home/${USER_NAME}
+
+SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
+
+# Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# deno
+RUN curl -fsSL https://deno.land/install.sh | sh
+
+# nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+# uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | bash
