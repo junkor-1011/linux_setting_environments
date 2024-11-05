@@ -62,9 +62,9 @@ else
 fi
 
 # fnm or nvm
-FNM_PATH="/home/wsl-user/.local/share/fnm"
+FNM_PATH="${HOME}/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/wsl-user/.local/share/fnm:$PATH"
+  export PATH="${FNM_PATH}:$PATH"
   eval "$(fnm env)"
   eval "$(fnm completions)"
 else
