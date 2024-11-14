@@ -133,7 +133,9 @@ if type zoxide > /dev/null 2>&1; then
 fi
 
 # fzf auto-generated
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if type fzf > /dev/null 2>&1; then
+    source <(fzf --zsh)
+fi
 
 # modeline
 # vim: set ft=zsh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :

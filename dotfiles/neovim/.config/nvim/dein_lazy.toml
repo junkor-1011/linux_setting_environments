@@ -352,10 +352,6 @@ endif
 
 ## Fuzzy Finder
 [[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
-
-[[plugins]]
 repo = 'junegunn/fzf.vim'
 depends = ['fzf', 'fzf-mru.vim']
 on_cmd = [
