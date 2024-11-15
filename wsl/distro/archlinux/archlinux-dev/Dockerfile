@@ -38,7 +38,7 @@ RUN pacman -Syyu --noconfirm && \
     docker-buildx qemu-user-static \
     podman podman-compose \
     && \
-    pacman -Scc && \
+    pacman -Scc --noconfirm && \
     rm -rf /var/cache/pacman/*
 
 # create user
