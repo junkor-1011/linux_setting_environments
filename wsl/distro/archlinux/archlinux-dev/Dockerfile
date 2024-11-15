@@ -25,7 +25,8 @@ RUN pacman -Syyu --noconfirm && \
     # base-devel zig \
     fontconfig \
     dnsutils iproute2 net-tools traceroute \
-    python python-pip python-pipenv python-poetry python-pipx \
+    python python-pip python-pipx \
+    # python-uv \
     git tig \
     eza lsd fzf procs bat hexyl fd ripgrep duf htop ncdu tldr zoxide git-delta \
     fuse \
