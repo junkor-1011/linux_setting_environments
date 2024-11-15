@@ -26,8 +26,9 @@ RUN pacman -Syyu --noconfirm && \
     vi nano vim \
     neovim \
     make \
-    # base-devel zig \
-    # yay \
+    # base-devel llvm zig \
+    # mingw-w64-gcc \
+    yay \
     fontconfig \
     dnsutils iproute2 net-tools traceroute \
     python python-pip python-pipx \
