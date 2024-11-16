@@ -65,8 +65,8 @@ fi
 FNM_PATH="${HOME}/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="${FNM_PATH}:$PATH"
-  eval "$(fnm env)"
-  eval "$(fnm completions)"
+  eval "$(fnm env --shell zsh)"
+  eval "$(fnm completions --shell zsh)"
 else
     # nvm
     if [ -f "${HOME}/.nvm/nvm.sh" ]; then
