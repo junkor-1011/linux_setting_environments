@@ -17,7 +17,7 @@ RUN pacman -Syyu --noconfirm && \
     man-db man-pages \
     coreutils \
     which less wget binutils \
-    dos2unix unrar unrar-free p7zip \
+    zip unzip dos2unix unrar unrar-free p7zip \
     whois \
     openssh autossh \
     tree jq expect \
