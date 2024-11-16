@@ -1,24 +1,24 @@
 
 # Defx
 
-[[plugins]]
-repo = 'kristijanhusak/defx-icons'
-
-[[plugins]]
-repo = 'kristijanhusak/defx-git'
-
-[[plugins]]
-repo = 'Shougo/defx.nvim'
-if = "has('nvim')"
-build = ':UpdateRemotePlugins'
-depends = ['defx-git', 'defx-icons']
-on_cmd = 'Defx'
-hook_add = '''
-nnoremap <silent> <Leader>f :<C-u> Defx <CR>
-'''
-hook_source = '''
-source ~/.config/nvim/plugins_dein/defx.vim
-'''
+# [[plugins]]
+# repo = 'kristijanhusak/defx-icons'
+#
+# [[plugins]]
+# repo = 'kristijanhusak/defx-git'
+#
+# [[plugins]]
+# repo = 'Shougo/defx.nvim'
+# if = "has('nvim')"
+# build = ':UpdateRemotePlugins'
+# depends = ['defx-git', 'defx-icons']
+# on_cmd = 'Defx'
+# hook_add = '''
+# nnoremap <silent> <Leader>f :<C-u> Defx <CR>
+# '''
+# hook_source = '''
+# source ~/.config/nvim/plugins_dein/defx.vim
+# '''
 
 # Fern
 [[plugins]]
