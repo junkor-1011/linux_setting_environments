@@ -11,7 +11,7 @@ return {
             vim.cmd("let g:airline_theme = 'simple'")
         end,
     },
-    { 'vim-denops/denops.vim' },
+    -- { 'vim-denops/denops.vim' },
     { 'luochen1990/rainbow' },
     { 'ryanoasis/vim-devicons' },
     { 'editorconfig/editorconfig-vim' },
@@ -23,6 +23,55 @@ return {
         end,
     },
     { 'tpope/vim-fugitive' },
+    {
+        'iberianpig/tig-explorer.vim',
+        lazy = true,
+        cmd = {
+            'TigStatus',
+            'TigOpenCurrentFile',
+        },
+    },
+    {
+        'rhysd/git-messenger.vim',
+        lazy = true,
+        cmd = {
+            'GitMessenger',
+        },
+    },
+    {
+        'Yggdroot/indentLine',
+        -- lazy = true,
+        -- cmd = {
+        --     'IndentLinesToggle',
+        -- },
+        config = function()
+            vim.cmd [[
+                nnoremap <silent> <Leader>i :<C-u>IndentLinesToggle<CR>
+            ]]
+        end,
+    },
+    {
+        'nicwest/vim-camelsnek',
+        cmd = {
+            'Camel',
+            'CamelB',
+            'Snek',
+            'Kebab',
+        },
+    },
+    {
+        'junegunn/vim-easy-align',
+        cmd = { 'EasyAlign' },
+        config = function()
+            vim.cmd [[
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+            ]]
+        end,
+    },
     {
         'osyo-manga/vim-anzu',
         lazy = true,
@@ -132,10 +181,70 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
         ft = { 'python' },
     },
     {
-    'williamboman/mason.nvim',
+        'neovim/nvim-lspconfig',
+        config = function()
+            -- Global mappings.
+            -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+            -- Use LspAttach autocommand to only map the following keys
+            -- after the language server attaches to the current buffer
+            vim.api.nvim_create_autocmd('LspAttach', {
+              group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+              callback = function(ev)
+                -- Enable completion triggered by <c-x><c-o>
+                vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+                -- Buffer local mappings.
+                -- See `:help vim.lsp.*` for documentation on any of the below functions
+                local opts = { buffer = ev.buf }
+
+                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', '<Leader>h', vim.lsp.buf.hover, opts) -- custom
+                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+                vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+                vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+                vim.keymap.set('n', '<space>wl', function()
+                  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                end, opts)
+                vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+                vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+                vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+                vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+                vim.keymap.set('n', '<space>f', function()
+                  vim.lsp.buf.format { async = true }
+                end, opts)
+              end,
+            })
+        end,
+    },
+    {
+        'j-hui/fidget.nvim',
+        config = function()
+            require('fidget').setup {
+                progress = {
+                    display = {
+                        progress_icon = { pattern = 'meter', period = 1 }
+                    }
+                }
+            }
+        end,
+    },
+    {
+        'williamboman/mason.nvim',
         config = function()
             require('mason').setup()
         end,
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'williamboman/mason-lspconfig.nvim',
+        },
     },
     {
         'williamboman/mason-lspconfig.nvim',
@@ -150,7 +259,6 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             }
         end,
     },
-    { 'neovim/nvim-lspconfig' },
     { 'nvimtools/none-ls.nvim' },
     -- { 'nvimdev/lpasaga.nvim' },
     {
@@ -161,6 +269,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
+            "onsails/lspkind.nvim",
         },
         config = function()
             local cmp = require'cmp'
@@ -189,7 +298,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
               }),
               sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = 'vsnip' }, -- For vsnip users.
+                -- { name = 'vsnip' }, -- For vsnip users.
                 -- { name = 'luasnip' }, -- For luasnip users.
                 -- { name = 'ultisnips' }, -- For ultisnips users.
                 -- { name = 'snippy' }, -- For snippy users.
@@ -200,14 +309,14 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
 
             -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
             -- Set configuration for specific filetype.
-            --[[ cmp.setup.filetype('gitcommit', {
-              sources = cmp.config.sources({
-                { name = 'git' },
-              }, {
-                { name = 'buffer' },
-              })
-            )
-            equire("cmp_git").setup() ]]-- 
+            -- [[ cmp.setup.filetype('gitcommit', {
+            --   sources = cmp.config.sources({
+            --     { name = 'git' },
+            --   }, {
+            --     { name = 'buffer' },
+            --   })
+            -- )
+            -- require("cmp_git").setup() ]] 
 
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline({ '/', '?' }, {
@@ -234,6 +343,33 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
             --   capabilities = capabilities
             -- }
+
+            -- lspkind
+            local lspkind = require('lspkind')
+            cmp.setup {
+                formatting = {
+                    format = lspkind.cmp_format({
+                        -- mode = 'symbol', -- show only symbol annotations
+                        maxwidth = {
+                            -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                            -- can also be a function to dynamically calculate max width such as
+                                -- menu = function() return math.floor(0.45 * vim.o.columns) end,
+                                menu = 50, -- leading text (labelDetails)
+                                abbr = 50, -- actual suggestion item
+                            },
+                            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                            show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+                            -- The function below will be called before any actual modifications from lspkind
+                                -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+                                before = function (entry, vim_item)
+                                    -- ...
+                                    return vim_item
+                                end
+                            })
+                }
+            }
+            -- lspkind end
         end,
     },
 }
