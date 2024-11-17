@@ -222,6 +222,16 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 vim.keymap.set('n', '<space>f', function()
                   vim.lsp.buf.format { async = true }
                 end, opts)
+                -- vim.keymap.set('n', '<Leader>f', function()
+                --   vim.lsp.buf.format { async = true }
+                -- end, opts)
+                vim.api.nvim_create_user_command(
+                    'Format',
+                    function()
+                        vim.lsp.buf.format { async = true }
+                    end,
+                    {}
+                )
               end,
             })
         end,
@@ -246,6 +256,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
         dependencies = {
             'neovim/nvim-lspconfig',
             'williamboman/mason-lspconfig.nvim',
+            'jayp0521/mason-null-ls.nvim',
         },
     },
     {
@@ -261,7 +272,22 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             }
         end,
     },
-    { 'nvimtools/none-ls.nvim' },
+    {
+        'nvimtools/none-ls.nvim',
+        config = function()
+            local null_ls = require('null-ls')
+
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.completion.spell,
+                },
+            })
+        end,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+    },
     {
         'nvimdev/lspsaga.nvim',
         dependencies = {
@@ -290,6 +316,10 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
         },
         config = function()
             local cmp = require'cmp'
+            local has_words_before = function()
+              local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+              return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
 
             cmp.setup({
               snippet = {
@@ -307,6 +337,27 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 documentation = cmp.config.window.bordered(),
               },
               mapping = cmp.mapping.preset.insert({
+                 -- Tab Completion
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  -- elseif luasnip.expand_or_jumpable() then
+                  --   luasnip.expand_or_jump()
+                  elseif has_words_before() then
+                    cmp.complete()
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" }),
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  -- elseif luasnip.jumpable(-1) then
+                  --   luasnip.jump(-1)
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" }),
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
