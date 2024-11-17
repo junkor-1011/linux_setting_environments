@@ -146,6 +146,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
     {
         'Shougo/context_filetype.vim',
         ft = {
+            -- 'lua',
             'html',
             'djangohtml',
             'markdown',
@@ -186,6 +187,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             -- Global mappings.
             -- See `:help vim.diagnostic.*` for documentation on any of the below functions
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
             vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
@@ -260,7 +262,21 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
         end,
     },
     { 'nvimtools/none-ls.nvim' },
-    -- { 'nvimdev/lpasaga.nvim' },
+    {
+        'nvimdev/lspsaga.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function()
+            require('lspsaga').setup({
+                lightbulb = {
+                    enable = false,
+                    -- sign = false,
+                },
+            })
+        end,
+    },
     {
         'hrsh7th/nvim-cmp',
         event = "InsertEnter",
@@ -270,6 +286,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "onsails/lspkind.nvim",
+            -- "SirVer/ultisnips",
         },
         config = function()
             local cmp = require'cmp'
@@ -278,7 +295,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
               snippet = {
                 -- REQUIRED - you must specify a snippet engine
                 expand = function(args)
-                  vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                  -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
                   -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
                   -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
                   -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
