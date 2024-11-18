@@ -262,12 +262,43 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
     {
         'williamboman/mason-lspconfig.nvim',
         config = function()
+            -- avoid conflict deno & node
+            local lspconfig = require('lspconfig')
+
+            local function is_node_project()
+                return lspconfig.util.root_pattern("package.json")(vim.fn.getcwd()) ~= nil
+            end
+
+            local function is_deno_project()
+                return lspconfig.util.root_pattern("deno.json", "deno.jsonc")(vim.fn.getcwd()) ~= nil
+            end
+
             -- ref: https://coralpink.github.io/commentary/neovim/lsp/nvim-cmp.html
             require('mason-lspconfig').setup_handlers {
                 function(server_name)
-                    require('lspconfig')[server_name].setup {
-                        capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    }
+                    if server_name == 'ts_ls' then
+                        if is_node_project() and (not is_deno_project()) then
+                            require('lspconfig')[server_name].setup {
+                                capabilities = require('cmp_nvim_lsp').default_capabilities()
+                            }
+                        end
+                    elseif server_name == 'biome' then
+                        if is_node_project() and (not is_deno_project()) then
+                            require('lspconfig')[server_name].setup {
+                                capabilities = require('cmp_nvim_lsp').default_capabilities()
+                            }
+                        end
+                    elseif server_name == 'denols' then
+                        if not is_node_project() then
+                            require('lspconfig')[server_name].setup {
+                                capabilities = require('cmp_nvim_lsp').default_capabilities()
+                            }
+                        end
+                    else
+                        require('lspconfig')[server_name].setup {
+                            capabilities = require('cmp_nvim_lsp').default_capabilities()
+                        }
+                    end
                 end,
             }
         end,
