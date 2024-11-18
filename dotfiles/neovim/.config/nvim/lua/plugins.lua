@@ -366,12 +366,15 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
               }),
               sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
+                { name = 'path' },
+                { name = 'buffer' },
                 -- { name = 'vsnip' }, -- For vsnip users.
                 -- { name = 'luasnip' }, -- For luasnip users.
                 -- { name = 'ultisnips' }, -- For ultisnips users.
                 -- { name = 'snippy' }, -- For snippy users.
               }, {
                 { name = 'buffer' },
+                { name = 'cmdline' },
               })
             })
 
