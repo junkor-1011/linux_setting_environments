@@ -332,6 +332,20 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                     -- sign = false,
                 },
             })
+            vim.api.nvim_create_user_command(
+                'LspShowBufferDiagnostics',
+                function()
+                    vim.cmd("Lspsaga show_buf_diagnostics")
+                end,
+                {}
+            )
+            vim.api.nvim_create_user_command(
+                'LspShowWorkspaceDiagnostics',
+                function()
+                    vim.cmd("Lspsaga show_workspace_diagnostics")
+                end,
+                {}
+            )
         end,
     },
     {
