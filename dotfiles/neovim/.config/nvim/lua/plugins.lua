@@ -346,6 +346,16 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 end,
                 {}
             )
+            vim.api.nvim_create_user_command(
+                'LspCodeAction',
+                function()
+                    vim.cmd("Lspsaga code_action")
+                end,
+                {}
+            )
+            vim.keymap.set("n", "<Leader>a", function ()
+                vim.cmd("Lspsaga code_action")
+            end, { desc = "Run :Lspsaga code_action" })
         end,
     },
     {
