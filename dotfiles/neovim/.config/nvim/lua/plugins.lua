@@ -15,11 +15,66 @@ return {
     { 'luochen1990/rainbow' },
     { 'ryanoasis/vim-devicons' },
     { 'editorconfig/editorconfig-vim' },
+    -- {
+    --     'airblade/vim-gitgutter',
+    --     config = function()
+    --         vim.cmd("nmap ]g <Plug>(GitGutterNextHunk)")
+    --         vim.cmd("nmap [g <Plug>(GitGutterPrevHunk)")
+    --     end,
+    -- },
     {
-        'airblade/vim-gitgutter',
+        'lewis6991/gitsigns.nvim',
         config = function()
-            vim.cmd("nmap ]g <Plug>(GitGutterNextHunk)")
-            vim.cmd("nmap [g <Plug>(GitGutterPrevHunk)")
+            require('gitsigns').setup {
+                word_diff = true,
+                on_attach = function(bufnr)
+                    local gitsigns = require('gitsigns')
+
+                    local function map(mode, l, r, opts)
+                      opts = opts or {}
+                      opts.buffer = bufnr
+                      vim.keymap.set(mode, l, r, opts)
+                    end
+
+                    map('n', ']g', function()
+                      if vim.wo.diff then
+                        vim.cmd.normal({']g', bang = true})
+                      else
+                        gitsigns.nav_hunk('next')
+                      end
+                    end)
+
+                    map('n', '[g', function()
+                      if vim.wo.diff then
+                        vim.cmd.normal({'[g', bang = true})
+                      else
+                        gitsigns.nav_hunk('prev')
+                      end
+                    end)
+
+                    vim.api.nvim_create_user_command(
+                        'StageHunk',
+                        function()
+                            gitsigns.stage_hunk()
+                        end,
+                        {}
+                    )
+                    vim.api.nvim_create_user_command(
+                        'ResetHunk',
+                        function()
+                            gitsigns.reset_hunk()
+                        end,
+                        {}
+                    )
+                    vim.api.nvim_create_user_command(
+                        'UndoStageHunk',
+                        function()
+                            gitsigns.undo_stage_hunk()
+                        end,
+                        {}
+                    )
+                end,
+            }
         end,
     },
     { 'tpope/vim-fugitive' },
