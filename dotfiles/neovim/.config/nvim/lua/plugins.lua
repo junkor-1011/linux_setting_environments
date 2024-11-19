@@ -437,10 +437,10 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
               }),
               sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'path' },
-                { name = 'buffer' },
-                { name = 'vsnip' }, -- For vsnip users.
+                { name = 'nvim_lsp', priority = 500 },
+                { name = 'path', priority = 250 },
+                { name = 'buffer', priority = 100 },
+                { name = 'vsnip', priority = 200 }, -- For vsnip users.
                 -- { name = 'luasnip' }, -- For luasnip users.
                 -- { name = 'ultisnips' }, -- For ultisnips users.
                 -- { name = 'snippy' }, -- For snippy users.
