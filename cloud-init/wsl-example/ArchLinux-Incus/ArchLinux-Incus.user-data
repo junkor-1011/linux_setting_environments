@@ -1,0 +1,60 @@
+#cloud-config
+timezone: Asia/Tokyo
+locale: en_US.utf8
+users:
+  - name: wsl-user
+    sudo:
+      - ALL=(ALL) NOPASSWD:ALL
+    groups: adm, sudo, wheel, incus, incus-admin
+    uid: 1000
+    shell: /usr/bin/fish
+write_files:
+  - path: /etc/wsl.conf
+    append: true
+    content: |
+      [interop]
+      appendWindowsPath=false
+      enabled=false
+      [boot]
+      systemd=true
+      [user]
+      default=wsl-user
+packages:
+  - ncurses
+  - which
+  - less
+  - wget
+  - curl
+  - man-db
+  - man-pages
+  - zip
+  - unzip
+  - jq
+  - tree
+  - make
+  - dnsutils
+  - iproute2
+  - net-tools
+  - traceroute
+  - git
+  - tig
+  - tmux
+  - htop
+  - fzf
+  - duf
+  - bat
+  - ripgrep
+  - fd
+  - lsd
+  - eza
+  - fish
+  - nushell
+#  - incus
+#  - incus-tools
+  - qemu-user-static
+  - neovim
+  - xorg-xeyes
+  - xclip
+  - wl-clipboard
+runcmd:
+  - yes | pacman -S incus incus-tools
