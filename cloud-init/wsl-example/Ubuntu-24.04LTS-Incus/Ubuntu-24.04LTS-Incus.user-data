@@ -17,6 +17,14 @@ write_files:
       # systemd=true
       [user]
       default=incus-user
+  - path: /etc/subuid
+    append: true
+    content: |
+      root:1000000:1000000000
+  - path: /etc/subgid
+    append: true
+    content: |
+      root:1000000:1000000000
   - path: /home/incus-user/.tmux.conf
     # owner: incus-user:incus-user
     permissions: '0644'
