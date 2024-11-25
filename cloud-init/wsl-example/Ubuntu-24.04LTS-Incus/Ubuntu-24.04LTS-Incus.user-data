@@ -134,7 +134,7 @@ packages:
   - man-db
   - zip
   - unzip
-  - bxip2
+  - bzip2
   - xz-utils
   - tree
   - jq
@@ -147,10 +147,14 @@ packages:
   - curl
   - wget
   - tmux
+  - tldr
   - htop
   - fzf
   - duf
   - bat
+  - lsd
+  - fd-find
+  - ripgrep
   - fish
   - x11-apps
   - xclip
@@ -158,6 +162,7 @@ packages:
   - waypipe
   - incus
   - incus-tools
+  - lxc
 
 runcmd:
   # workaround
