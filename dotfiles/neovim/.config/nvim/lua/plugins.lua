@@ -227,17 +227,17 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             'toml',
         },
     },
-    {
-        'Shougo/neco-vim',
-        ft = { 'vim' },
-    },
-    {
-        'ujihisa/neco-look',
-        ft = {
-            'gitcommit',
-            'markdown',
-        },
-    },
+    -- {
+    --     'Shougo/neco-vim',
+    --     ft = { 'vim' },
+    -- },
+    -- {
+    --     'ujihisa/neco-look',
+    --     ft = {
+    --         'gitcommit',
+    --         'markdown',
+    --     },
+    -- },
     {
         'jmcantrell/vim-virtualenv',
         lazy = true,
@@ -489,7 +489,7 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
               }),
               sources = cmp.config.sources({
                 { name = 'nvim_lsp', priority = 500 },
