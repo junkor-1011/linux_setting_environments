@@ -26,6 +26,16 @@ elif [ "$(uname -s)" = "Darwin" ]; then
     alias ll='ls -alF'
     alias la='ls -AF'
     alias l='ls -CF'
+
+    if command -v gdircolors >/dev/null 2>&1; then
+        alias dircolors="$(command -v gdircolors)"
+    fi
+    if command -v gdir >/dev/null 2>&1; then
+        alias dir='gdir --color=auto'
+    fi
+    if command -v gvdir >/dev/null 2>&1; then
+        alias dir='gvdir --color=auto'
+    fi
 fi
 
 alias grep='grep --color=auto'

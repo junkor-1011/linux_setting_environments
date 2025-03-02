@@ -42,7 +42,12 @@ zinit load Tarrasch/zsh-bd
 # zinit load rupa/z
 # ^^^ use zoxide ^^^
 zinit load mollifier/cd-gitroot
-zinit load liangguohuan/zsh-dircolors-solarized
+if [ "$(uname -s)" = "Linux" ]; then
+    zinit load liangguohuan/zsh-dircolors-solarized
+elif [ "$(uname -s)" = "Darwin" ]; then
+    # TODO fix error for MacOS
+    :
+fi
 if [ -f ~/.p10k.zsh ]; then
     zi ice depth=1; zi light romkatv/powerlevel10k
     # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
