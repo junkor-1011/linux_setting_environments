@@ -27,6 +27,7 @@ problem of missing `/tmp/.X11-unix/X0` socket:
 
 - [Unable to start X server in WSL2](https://github.com/microsoft/wslg/issues/1172)
 - [WSL2で dbus と WSLg が使えなかったのをどうにかする](https://blog.hinaloe.net/2024/01/24/wsl2-dbus-wslg/)
+- [ArchWiki - LXD](https://wiki.archlinux.jp/index.php/LXD#.E3.82.B3.E3.83.B3.E3.83.86.E3.83.8A.E5.86.85.E3.81.A7.E3.82.BD.E3.82.B1.E3.83.83.E3.83.88.E3.82.92.E9.81.A9.E5.88.87.E3.81.AA.E5.A0.B4.E6.89.80.E3.81.AB.E3.83.AA.E3.83.B3.E3.82.AF)
 
 ### with systemd
 
@@ -59,5 +60,8 @@ systemctl start wslg_workarounds.service --user
 
 Reference:
 
+- ArchWiki
+    - [systemd](https://wiki.archlinux.jp/index.php/Systemd)
+    - [systemd/ユーザー](https://wiki.archlinux.jp/index.php/Systemd/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC)
 - [学生たちの技術ブログ - Systemdで起動時にスクリプトを実行する](https://students-tech.blog/post/systemd-startup.html)
 - [Qiita - systemdを用いたプログラムの自動起動](https://qiita.com/tkato/items/6a227e7c2c2bde19521c)
