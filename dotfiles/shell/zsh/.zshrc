@@ -8,21 +8,29 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # alias
 
-# alias ls="ls -FG --color=auto"
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto -F'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+if [ "$(uname -s)" = "Linux" ]; then
+    # alias ls="ls -FG --color=auto"
+    if [ -x /usr/bin/dircolors ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto -F'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    fi
+
+    alias ll='ls -alF'
+    alias la='ls -AF'
+    alias l='ls -CF'
+elif [ "$(uname -s)" = "Darwin" ]; then
+    alias ls='ls -GF'
+    alias ll='ls -alF'
+    alias la='ls -AF'
+    alias l='ls -CF'
 fi
 
-alias ll='ls -alF'
-alias la='ls -AF'
-alias l='ls -CF'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # moving directory
 setopt auto_cd
