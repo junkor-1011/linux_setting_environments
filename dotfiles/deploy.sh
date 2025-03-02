@@ -1,5 +1,5 @@
-#!/bin/bash
-set -eu
+#!/usr/bin/env bash
+set -euo pipefail
 
 # get this script's path
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
@@ -15,10 +15,10 @@ source ${SCRIPT_DIR}/dotfiles
 # deploy
 for target in ${TARGET_LIST[@]}; do
     echo $target
-    /bin/bash ${DEPLOY_SCRIPTS_PATH[$target]} ${DEPLOY_SCRIPTS_OPTS[$target]}
+    "$(command -v bash)" ${DEPLOY_SCRIPTS_PATH[$target]} ${DEPLOY_SCRIPTS_OPTS[$target]}
 
     if [ "${DEPLOY_SCRIPTS_SET_DEFAULT[$target]}" != "" ]; then
-        /bin/bash ${DEPLOY_SCRIPTS_SET_DEFAULT[$target]}
+        "$(command -v bash)" ${DEPLOY_SCRIPTS_SET_DEFAULT[$target]}
     else
         echo "${target} does not have default config template."
     fi
