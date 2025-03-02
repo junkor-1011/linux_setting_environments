@@ -1,0 +1,13 @@
+# edit & copy this to ~/.config/systemd/user/wslg_workarounds.service
+
+[Unit]
+Description=enable x11 & wayland
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/path/to/<script-name>
+Restart=no
+
+[Install]
+WantedBy=default.target
