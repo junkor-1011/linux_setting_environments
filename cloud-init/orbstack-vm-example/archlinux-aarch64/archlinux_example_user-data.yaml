@@ -1,0 +1,92 @@
+#cloud-config
+# NO-TESTED
+timezone: Asia/Tokyo
+locale: en_US.utf8
+disable_root: True
+users:
+  - name: orb-user
+    ssh_authorized_keys:
+      - ssh-ed25519 <EDIT> XXX@YYY
+    sudo:
+      - ALL=(ALL) NOPASSWD:ALL
+    groups: adm, sudo, wheel, docker
+    uid: 501
+    shell: /usr/bin/fish
+# write_files:
+#   - path: /path/to/filename
+#     append: true
+#     content: |
+#       line1
+#       line2
+package_update: true
+package_upgrade: true
+packages:
+  - ncurses
+  - which
+  - less
+  - wget
+  - curl
+  - man-db
+  - man-pages
+  - zip
+  - unzip
+  - dos2unix
+  - jq
+  - tree
+  - make
+  - dnsutils
+  - iproute2
+  - net-tools
+  - traceroute
+  - git
+  - tig
+  - tmux
+  - htop
+  - procs
+  - ncdu
+  - fzf
+  - duf
+  - bat
+  - ripgrep
+  - fd
+  - lsd
+  - eza
+  - git-delta
+  - procs
+  - hexyl
+  - zoxide
+  - fish
+  - zsh
+  - nushell
+  - qemu-user-static
+  - vim
+  - neovim
+  - xorg-xeyes
+  - xorg-xauth
+  - xclip
+  - xsel
+  - openssh
+  - autossh
+  - docker
+  - docker-compose
+  - podman
+  - podman-compose
+  - shellcheck
+  - shfmt
+  - trivy
+  - python-pipx
+  # devel
+  - base-devel
+  - llvm
+  - zig
+  - go
+runcmd:
+# - sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
+- sed -i -e 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+- sed -i -e 's/^#X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
+- systemctl enable sshd
+- systemctl start sshd
+- systemctl enable docker
+- systemctl start docker
+
+# vim: set ft=yaml ff=unix expandtab ts=2 sw=2
