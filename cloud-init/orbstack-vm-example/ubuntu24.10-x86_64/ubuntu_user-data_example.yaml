@@ -10,7 +10,7 @@ users:
     sudo:
       - ALL=(ALL) NOPASSWD:ALL
     groups: adm, sudo, wheel, docker
-    uid: 501
+    uid: 2501
     shell: /usr/bin/fish
 # write_files:
 #   - path: /path/to/filename
@@ -21,26 +21,47 @@ users:
 package_update: true
 package_upgrade: true
 packages:
+  - ubuntu-advantage-tools
+  - command-not-found
   - ncurses
   - which
   - less
   - wget
   - curl
+  - xz-utils
+  - man
   - man-db
-  - man-pages
   - zip
   - unzip
-  - dos2unix
+  # - dos2unix
+  # - nkf
+  # - p7zip-full
+  # - unrar
+  - fontconfig
+  - fonts-ipafont
+  - locales
+  - expect
   - jq
   - tree
   - make
-  - dnsutils
-  - iproute2
-  - net-tools
-  - traceroute
   - git
   - tig
+  - git-secrets
   - tmux
+  - fish
+  - zsh
+  - nushell
+  - bind9-dnsutils
+  - net-tools
+  - iproute2
+  - iputils-ping
+  - iputils-clockdiff
+  - iputils-arping
+  - openssh-server
+  - openssh
+  - autossh
+  - netcat-openbsd
+  - ncat
   - htop
   - procs
   - ncdu
@@ -55,40 +76,30 @@ packages:
   - procs
   - hexyl
   - zoxide
-  - fish
-  - zsh
-  - nushell
-  - qemu-user-static
+  - fuse
+  - libfuse2
+  # - qemu-user-static
   - vim
-  - neovim
-  - xorg-xeyes
-  - xorg-xauth
+  # - neovim
+  - mesa-utils-extra
+  - x11-apps
+  - xauth
   - xclip
   - xsel
-  - openssh
-  - autossh
-  - docker
-  - docker-compose
-  - podman
-  - podman-compose
+  # - podman
+  # - podman-compose
+  # - uidmap
   - shellcheck
   - shfmt
-  - trivy
-  - python-pipx
+  - pipx
   # devel
-  - base-devel
-  - llvm
-  - zig
-  - go
+  # - build-essential
+  # - llvm
 runcmd:
 # - sed -i -e 's/^#Port 22/Port 2022/' /etc/ssh/sshd_config
 - sed -i -e 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 - sed -i -e 's/^#X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 - systemctl enable sshd
 - systemctl start sshd
-- systemctl enable docker
-- systemctl start docker
-- echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf
-- gpasswd -a orb-user docker
 
 # vim: set ft=yaml ff=unix expandtab ts=2 sw=2
