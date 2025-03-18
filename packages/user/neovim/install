@@ -1,8 +1,8 @@
-#!/usr/bin/env sh
-set -eux
+#!/usr/bin/env bash
+set -euxo pipefail
 
 # only linux
-if [ $(uname) != 'Linux' ]; then
+if [ $(uname -s) != 'Linux' ]; then
     echo "only works at Linux, sorrry."
     exit 1
 fi
@@ -11,6 +11,8 @@ fi
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
+ARCH="$(uname -m)"
+
 # ToDo: Arguments
 # VERSION=v0.4.4
 VERSION=stable
@@ -18,7 +20,14 @@ VERSION=stable
 INSTALL_PATH=${HOME}/LocalApps/nvim-linux64-stable
 EXECUTIVE_PATH=${HOME}/bin
 
-NVIM_APPIMAGE=nvim.appimage
+if [ "$ARCH" = "x86_64" ]; then
+    NVIM_APPIMAGE=nvim-linux-x86_64.appimage
+elif [ "$ARCH" = "aarch64" ]; then
+    NVIM_APPIMAGE=nvim-linux-arm64.appimage
+else
+    echo "Not Supported Architecture: $ARCH" >&2
+    exit 1
+fi
 DOWNLOAD_URL=https://github.com/neovim/neovim/releases/download/${VERSION}/${NVIM_APPIMAGE}
 
 # download
