@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -euo pipefail
 
 # requirements: unzip
 
@@ -7,10 +7,29 @@ set -eu
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
-# ToDo: Arguments
-# ToDo: control version by arguments
-CPU_TYPE=x86_64
-# or aarch64
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
+if [ "$OS" = "Darwin" ]; then
+    echo "This script doesn't support MacOS. Please try to execute \`brew install aws-sam-cli\`" >&2
+    exit 1
+elif [ "$OS" = "Linux" ]; then
+    case "$ARCH" in
+        x86_64)
+            CPU_TYPE="$ARCH"
+            ;;
+        aarch64)
+            CPU_TYPE="arm64"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
+fi
+
 INSTALL_BASE=${HOME}/LocalApps
 INSTALL_PATH=${INSTALL_BASE}/aws-sam-cli
 EXECTIVE_PATH=${HOME}/bin
