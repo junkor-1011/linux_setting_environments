@@ -1,48 +1,85 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-# only linux
-if [ $(uname -s) != 'Linux' ]; then
-    echo "only works at Linux, sorrry."
-    exit 1
-fi
-
 # get script path
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
+OS="$(uname -s)"
 ARCH="$(uname -m)"
 
-# ToDo: Arguments
-# VERSION=v0.4.4
-VERSION=stable
-# OS=linux64
-INSTALL_PATH=${HOME}/LocalApps/nvim-linux64-stable
-EXECUTIVE_PATH=${HOME}/bin
-
-if [ "$ARCH" = "x86_64" ]; then
-    NVIM_APPIMAGE=nvim-linux-x86_64.appimage
-elif [ "$ARCH" = "aarch64" ]; then
-    NVIM_APPIMAGE=nvim-linux-arm64.appimage
+if [ "${OS}" = "Linux" ]; then
+    case "$ARCH" in
+        x86_64)
+            PKG_NAME="nvim-linux-x86_64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        aarch64)
+            PKG_NAME="nvim-linux-arm64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+elif [ "${OS}" = "Darwin" ]; then
+    case "$ARCH" in
+        arm64)
+            PKG_NAME="nvim-macos-arm64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
 else
-    echo "Not Supported Architecture: $ARCH" >&2
+    echo "Unsupported OS: $OS" >&2
     exit 1
 fi
-DOWNLOAD_URL=https://github.com/neovim/neovim/releases/download/${VERSION}/${NVIM_APPIMAGE}
+
+# VERSION=stable
+if [ "${1:-stable}" = "stable" ]; then
+    VERSION="stable"
+elif [ "${1}" = "nightly" ]; then
+    VERSION="nightly"
+fi
+INSTALL_NAME="${PKG_NAME}-${VERSION}"
+INSTALL_BASE="${HOME}/LocalApps"
+INSTALL_PATH="${INSTALL_BASE}/${INSTALL_NAME}"
+EXECUTIVE_PATH="${HOME}/bin"
+
+DOWNLOAD_URL="https://github.com/neovim/neovim/releases/download/${VERSION}/${PKG_TARBALL}"
 
 # download
-curl -LO ${DOWNLOAD_URL}
+curl -LO "${DOWNLOAD_URL}"
 
 # install
-if [ ! -d ${INSTALL_PATH} ]; then
-    mkdir -p ${INSTALL_PATH}
+tar xvf "${PKG_TARBALL}"     # inflate
+if [ ! -d "${INSTALL_BASE}" ]; then
+    mkdir -p "${INSTALL_BASE}"
 fi
-mv ${NVIM_APPIMAGE} ${INSTALL_PATH}
-chmod 755 ${INSTALL_PATH}/${NVIM_APPIMAGE}
+if [ -d "${INSTALL_PATH}" ]; then
+    # rm old files
+    rm -rf "${INSTALL_PATH}"
+fi
+if [ "$OS" = "Linux" ]; then
+    mv "${PKG_NAME}" -t "${INSTALL_BASE}"
+else
+    mv "${PKG_NAME}" "${INSTALL_BASE}"
+fi
+mv "${INSTALL_BASE}/${PKG_NAME}" "${INSTALL_PATH}"
+
+# remove trash
+rm "${PKG_TARBALL}"
 
 # make synbolic link
 if [ ! -d ${EXECUTIVE_PATH} ]; then
     mkdir -p ${EXECUTIVE_PATH}
 fi
-ln -snfv ${INSTALL_PATH}/${NVIM_APPIMAGE} ${EXECUTIVE_PATH}/nvim
-ln -snfv ${INSTALL_PATH}/${NVIM_APPIMAGE} ${EXECUTIVE_PATH}/nvim-stable
+if [ "$VERSION" = "stable" ]; then
+    ln -snfv "${INSTALL_PATH}/bin/nvim" "${EXECUTIVE_PATH}/nvim"
+    ln -snfv "${INSTALL_PATH}/bin/nvim" "${EXECUTIVE_PATH}/nvim-stable"
+elif [ "$VERSION" = "nightly" ]; then
+    ln -snfv "${INSTALL_PATH}/bin/nvim" "${EXECUTIVE_PATH}/nvim-pre"
+    ln -snfv "${INSTALL_PATH}/bin/nvim" "${EXECUTIVE_PATH}/nvim-nightly"
+fi
