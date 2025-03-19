@@ -27,7 +27,7 @@ if [ "$OS" = "Linux" ]; then
     esac
 elif [ "$OS" = "Darwin" ]; then
     case "$ARCH" in
-        aarch64)
+        arm64)
             TGZ_FILENAME="dockle_${VERSION}_macOS-ARM64.tar.gz"
             ;;
         x86_64)
