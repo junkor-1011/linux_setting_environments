@@ -1,31 +1,68 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -euxo pipefail
 
-# ToDo: Arguments
-EXECTIVE_PATH=${HOME}/bin
+SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
+cd "$SCRIPT_DIR" || exit 1
 
-# clone or update
-if [ ! -d $HOME/.fzf/.git ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
+VERSION="$(curl --silent "https://api.github.com/repos/junegunn/fzf/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
+
+echo "install fzf ..."
+echo "OS: ${OS}, ARCH: ${ARCH}, VERSION: ${VERSION}"
+
+if [ "$OS" = "Linux" ]; then
+    case "$ARCH" in
+        x86_64)
+            PKG_NAME="fzf-${VERSION}-linux_amd64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        aarch64)
+            PKG_NAME="fzf-${VERSION}-linux_arm64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+elif [ "$OS" = "Darwin" ]; then
+    case "$ARCH" in
+        x86_64)
+            PKG_NAME="fzf-${VERSION}-darwin_amd64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        aarch64)
+            PKG_NAME="fzf-${VERSION}-darwin_arm64"
+            PKG_TARBALL="${PKG_NAME}.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
 else
-    cd $HOME/.fzf
-    git pull
+    echo "Unsupported OS: $OS" >&2
+    exit 1
 fi
 
-# install
-# $HOME/.fzf/install
+WORK_DIR="${SCRIPT_DIR}/.__TMP__"
+if [ -d "${WORK_DIR}" ]; then
+    rm -rf "${WORK_DIR}"
+fi
+mkdir -p "${WORK_DIR}"
+cd "${WORK_DIR}"
 
-expect -c "
-    spawn ${HOME}/.fzf/install
-    expect \"Do you want to enable fuzzy auto-completion?\"
-    send \x0a
-    expect \"Do you want to enable key bindings?\"
-    send \x0a
-    expect \"Do you want to update your shell configuration files?\"
-    send \"n\"
-"
-echo "Done."
+INSTALL_PATH="${HOME}/LocalApps"
+EXECUTIVE_PATH="${HOME}/bin"
 
-# make link
-ln -fsv ${HOME}/.fzf/bin/fzf ${EXECTIVE_PATH}/fzf
-ln -fsv ${HOME}/.fzf/bin/fzf-tmux ${EXECTIVE_PATH}/fzf-tmux
+DOWNLOAD_URL="https:/github.com/junegunn/fzf/releases/download/v${VERSION}/${PKG_TARBALL}"
+curl -LO "${DOWNLOAD_URL}"
+tar xvf "${PKG_TARBALL}"
+
+mv ./fzf "${INSTALL_PATH}/fzf"
+ln -sfv "${INSTALL_PATH}/fzf" "${EXECUTIVE_PATH}/fzf"
+
+cd ..
+rm -rf "${WORK_DIR}"
+
+echo "complete install ${PKG_NAME}"
