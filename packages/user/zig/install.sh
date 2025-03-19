@@ -8,7 +8,6 @@ cd $SCRIPT_DIR
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
-#VERSION="$(curl --silent "https://api.github.com/repos/ziglang/zig/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
 VERSION="$(curl -s https://api.github.com/repos/ziglang/zig/releases/latest | sed -n 's/.*"tag_name": "\(.*\)",/\1/p')"
 
 if [ "${OS}" = "Linux" ]; then
@@ -33,7 +32,6 @@ fi
 PKG_TARBALL="${PKG_NAME}.tar.xz"
 
 INSTALL_BASE="${HOME}/LocalApps"
-# INSTALL_PATH="${INSTALL_BASE}/${PKG_NAME}"
 EXECUTIVE_PATH="${HOME}/bin"
 
 DOWNLOAD_URL="https://ziglang.org/download/${VERSION}/${PKG_TARBALL}"
@@ -44,8 +42,6 @@ if [ -d "${WORK_DIR}" ]; then
 fi
 mkdir -p "${WORK_DIR}"
 cd "${WORK_DIR}"
-
-echo "DEBUG, DOWNLOAD_URL: ${DOWNLOAD_URL}"
 
 curl -LO "${DOWNLOAD_URL}"
 tar xvf "${PKG_TARBALL}"
