@@ -1,22 +1,54 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -euxo pipefail
 
 # get script path
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"
 
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
 VERSION="$(curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
-OS=Linux
-CPU_ARCH="64bit"
 
 INSTALL_PATH="${HOME}/LocalApps"
 EXECTIVE_PATH="${HOME}/bin"
 
-TGZ_FILENAME="dockle_${VERSION}_${OS}-${CPU_ARCH}.tar.gz"
+if [ "$OS" = "Linux" ]; then
+    case "$ARCH" in
+        x86_64)
+            TGZ_FILENAME="dockle_${VERSION}_${OS}-64bit.tar.gz"
+            ;;
+        aarch64)
+            TGZ_FILENAME="dockle_${VERSION}_${OS}-ARM64.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+elif [ "$OS" = "Darwin" ]; then
+    case "$ARCH" in
+        aarch64)
+            TGZ_FILENAME="dockle_${VERSION}_macOS-ARM64.tar.gz"
+            ;;
+        x86_64)
+            TGZ_FILENAME="dockle_${VERSION}_macOS-64bit.tar.gz"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
+fi
+
 DOWNLOAD_URL="https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/${TGZ_FILENAME}"
 
-WORK_DIR="__TMP__"
-mkdir "${WORK_DIR}"
+WORK_DIR="${SCRIPT_DIR}/__TMP__"
+if [ -d "${WORK_DIR}" ]; then
+    rm -rf "${WORK_DIR}"
+fi
+mkdir -p "${WORK_DIR}"
 cd "${WORK_DIR}"
 curl -LO "${DOWNLOAD_URL}"
 tar xzvf ${TGZ_FILENAME}
@@ -28,4 +60,3 @@ cd ..
 rm -rf "${WORK_DIR}"
 
 echo "dockle v${VERSION} has been installed."
-echo "(Please check update by yourself.)"
