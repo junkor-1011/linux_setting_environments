@@ -33,7 +33,7 @@ elif [ "$OS" = "Darwin" ]; then
 		x86_64)
 			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_darwin_amd64"
 			;;
-		aarch64)
+		arm64)
 			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_darwin_arm64"
 			;;
 		*)
