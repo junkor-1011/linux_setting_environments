@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -euxo pipefail
 
 # get script path
 SCRIPT_DIR="$(
@@ -8,17 +8,42 @@ SCRIPT_DIR="$(
 )"
 cd "$SCRIPT_DIR"
 
-VERSION="$(curl --silent "https://api.github.com/repos/mvdan/sh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
-VERSION="v${VERSION}"
-OS=linux
-CPU_ARCH="amd64"
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
+VERSION="v$(curl --silent "https://api.github.com/repos/mvdan/sh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
 
 INSTALL_PATH="${HOME}/LocalApps"
 EXECTIVE_PATH="${HOME}/bin"
 
-DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_${OS}_${CPU_ARCH}"
-
-echo "Let's Install shfmt ver: ${VERSION}, please check if there is newer version."
+if [ "$OS" = "Linux" ]; then
+	case "$ARCH" in
+		x86_64)
+			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_linux_amd64"
+			;;
+		aarch64)
+			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_linux_arm64"
+			;;
+		*)
+            echo "Unsupported architecture: $ARCH" >&2
+			exit 1
+	esac
+elif [ "$OS" = "Darwin" ]; then
+	case "$ARCH" in
+		x86_64)
+			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_darwin_amd64"
+			;;
+		aarch64)
+			DOWNLOAD_URL="https://github.com/mvdan/sh/releases/download/${VERSION}/shfmt_${VERSION}_darwin_arm64"
+			;;
+		*)
+            echo "Unsupported architecture: $ARCH" >&2
+			exit 1
+	esac
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
+fi
 
 WORK_DIR="__TMP__"
 mkdir "${WORK_DIR}"
@@ -31,3 +56,5 @@ ln -sfv "${INSTALL_PATH}/shfmt" "${EXECTIVE_PATH}/shfmt"
 # cleanup
 cd ..
 rm -rf "${WORK_DIR}"
+
+echo "Complete installing shfmt ver: ${VERSION} (OS: ${OS}, ARCH: ${ARCH})."
