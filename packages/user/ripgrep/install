@@ -1,20 +1,37 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -euxo pipefail
 
 # get script path
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"
 
-# ToDo: Arguments
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
 VERSION="$(curl --silent "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')"
-OS=linux
-CPU_TYPE=x86_64
-BUILD_TYPE=musl
+
 # or gnu
 INSTALL_PATH="${HOME}/LocalApps"
 EXECTIVE_PATH="${HOME}/bin"
 
-PACKAGE="ripgrep-${VERSION}-${CPU_TYPE}-unknown-${OS}-${BUILD_TYPE}"
+if [ "$OS" = "Linux" ]; then
+    PACKAGE="ripgrep-${VERSION}-${ARCH}-unknown-linux-gnu"
+elif [ "$OS" = "Darwin" ]; then
+    case "$ARCH" in
+        arm64)
+            PACKAGE="ripgrep-${VERSION}-aarch64-apple-darwin"
+            ;;
+        x86_64)
+            PACKAGE="ripgrep-${VERSION}-x86_64-apple-darwin"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
+fi
 DOWNLOAD_URL="https://github.com/BurntSushi/ripgrep/releases/download/${VERSION}/${PACKAGE}.tar.gz"
 
 # download
@@ -30,7 +47,11 @@ if [ -d "${INSTALL_PATH}/${PACKAGE}" ];then
     rm -rf "${INSTALL_PATH}/${PACKAGE}"
 fi
 
-mv "${PACKAGE}" -t "${INSTALL_PATH}"
+if [ "$OS" = Darwin ]; then
+    mv "${PACKAGE}" "${INSTALL_PATH}"
+else
+    mv "${PACKAGE}" -t "${INSTALL_PATH}"
+fi
 
 # remove trash
 rm "${PACKAGE}.tar.gz"
