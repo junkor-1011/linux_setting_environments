@@ -27,7 +27,7 @@ elif [ "$OS" = "Darwin" ]; then
         x86_64)
             PACKAGE_TGZ="go${VERSION}.darwin-amd64.tar.gz"
             ;;
-        aarch64)
+        arm64)
             PACKAGE_TGZ="go${VERSION}.darwin-arm64.tar.gz"
             ;;
         *)

@@ -32,7 +32,7 @@ elif [ "$OS" = "Darwin" ]; then
             PKG_NAME="fzf-${VERSION}-darwin_amd64"
             PKG_TARBALL="${PKG_NAME}.tar.gz"
             ;;
-        aarch64)
+        arm64)
             PKG_NAME="fzf-${VERSION}-darwin_arm64"
             PKG_TARBALL="${PKG_NAME}.tar.gz"
             ;;
