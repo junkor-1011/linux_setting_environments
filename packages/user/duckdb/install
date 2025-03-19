@@ -5,15 +5,37 @@ set -euxo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 cd "$SCRIPT_DIR"
 
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
 VERSION="v$(curl --silent "https://api.github.com/repos/duckdb/duckdb/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')"
-OS=linux
-CPU_ARCH="amd64"
 
 INSTALL_PATH="${HOME}/LocalApps"
 EXECTIVE_PATH="${HOME}/bin"
 
-ZIPFILE="duckdb_cli-${OS}-${CPU_ARCH}.zip"
-DOWNLOAD_URL="https://github.com/duckdb/duckdb/releases/download/${VERSION}/${ZIPFILE}"
+# ZIPFILE="duckdb_cli-${OS}-${CPU_ARCH}.zip"
+if [ "$OS" = "Linux" ]; then
+    case "$ARCH" in
+        x86_64)
+            BINARY_NAME="duckdb_cli-linux-amd64"
+            GZIPFILE="${BINARY_NAME}.gz"
+            ;;
+        aarch64)
+            BINARY_NAME="duckdb_cli-linux-aarch64"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH" >&2
+            exit 1
+    esac
+elif [ "$OS" = "Darwin" ]; then
+    BINARY_NAME="duckdb_cli-osx-universal"
+else
+    echo "Unsupported OS: $OS" >&2
+    exit 1
+fi
+
+GZIPFILE="${BINARY_NAME}.gz"
+DOWNLOAD_URL="https://github.com/duckdb/duckdb/releases/download/${VERSION}/${GZIPFILE}"
 
 WORK_DIR="__TMP__"
 if [ -d "${WORK_DIR}" ]; then
@@ -23,8 +45,9 @@ mkdir "${WORK_DIR}"
 cd "${WORK_DIR}"
 curl -LO "${DOWNLOAD_URL}"
 # extract "duckdb" binary
-unzip "${ZIPFILE}"
-mv ./duckdb "${INSTALL_PATH}/duckdb"
+gzip -d "${GZIPFILE}"
+chmod +x "${BINARY_NAME}"
+mv "./${BINARY_NAME}" "${INSTALL_PATH}/duckdb"
 ln -sfv "${INSTALL_PATH}/duckdb" "${EXECTIVE_PATH}/duckdb"
 
 # cleanup
@@ -32,4 +55,3 @@ cd ..
 rm -rf "${WORK_DIR}"
 
 echo "duckdb ${VERSION} has been installed."
-echo "(Please check update by yourself.)"
