@@ -137,5 +137,10 @@ if type fzf > /dev/null 2>&1; then
     source <(fzf --zsh)
 fi
 
+# GitHub CLI completions
+if type gh > /dev/null 2>&1; then
+    source <(gh completion -s zsh)
+fi
+
 # modeline
 # vim: set ft=zsh ff=unix fileencoding=utf-8 expandtab ts=4 sw=4 :
