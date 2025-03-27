@@ -1,0 +1,8 @@
+iterm2
+karabiner-elements
+openineditor-lite
+openinterminal-lite
+utm
+warp
+wezterm
+zed
