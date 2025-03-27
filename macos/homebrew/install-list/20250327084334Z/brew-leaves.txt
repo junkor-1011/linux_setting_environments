@@ -8,13 +8,16 @@ eza
 fd
 fnm
 fzf
+gh
 git
 git-delta
+gitui
 go
 hadolint
 helm
 htop
 kind
+lazygit
 lsd
 minikube
 podman
