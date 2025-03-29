@@ -19,10 +19,13 @@ helm
 htop
 kind
 lazygit
+lefthook
 lsd
 minikube
 ncdu
+pipx
 podman-compose
+pre-commit
 ripgrep
 shellcheck
 shfmt
