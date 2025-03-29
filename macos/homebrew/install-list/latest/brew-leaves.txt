@@ -6,6 +6,7 @@ duckdb
 duf
 eza
 fd
+fish
 fnm
 fzf
 gh
@@ -20,10 +21,12 @@ kind
 lazygit
 lsd
 minikube
-podman
+ncdu
+podman-compose
 ripgrep
 shellcheck
 shfmt
+tig
 tmux
 tree
 trivy

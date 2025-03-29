@@ -1,3 +1,4 @@
+drawio
 iterm2
 karabiner-elements
 openineditor-lite
