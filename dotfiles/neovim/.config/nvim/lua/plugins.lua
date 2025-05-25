@@ -311,19 +311,25 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
         end,
     },
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         config = function()
             require('mason').setup()
         end,
         dependencies = {
             'neovim/nvim-lspconfig',
-            'williamboman/mason-lspconfig.nvim',
+            -- 'mason-org/mason-lspconfig.nvim',
             'jayp0521/mason-null-ls.nvim',
         },
     },
     {
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason-lspconfig.nvim',
+        dependencies = {
+            { 'mason-org/mason.nvim', opts = {} },
+            'neovim/nvim-lspconfig',
+        },
         config = function()
+            require("mason-lspconfig").setup()
+
             -- avoid conflict deno & node
             local lspconfig = require('lspconfig')
 
@@ -332,37 +338,45 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
             end
 
             local function is_deno_project()
-                return lspconfig.util.root_pattern("deno.json", "deno.jsonc")(vim.fn.getcwd()) ~= nil
+                return lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")(vim.fn.getcwd()) ~= nil
+            end
+
+            if is_node_project() then
+                vim.lsp.enable('denols', false)
+            end
+
+            if is_deno_project() then
+                vim.lsp.enable('ts_ls', false)
             end
 
             -- ref: https://coralpink.github.io/commentary/neovim/lsp/nvim-cmp.html
-            require('mason-lspconfig').setup_handlers {
-                function(server_name)
-                    if server_name == 'ts_ls' then
-                        if is_node_project() and (not is_deno_project()) then
-                            require('lspconfig')[server_name].setup {
-                                capabilities = require('cmp_nvim_lsp').default_capabilities()
-                            }
-                        end
-                    elseif server_name == 'biome' then
-                        if is_node_project() and (not is_deno_project()) then
-                            require('lspconfig')[server_name].setup {
-                                capabilities = require('cmp_nvim_lsp').default_capabilities()
-                            }
-                        end
-                    elseif server_name == 'denols' then
-                        if not is_node_project() then
-                            require('lspconfig')[server_name].setup {
-                                capabilities = require('cmp_nvim_lsp').default_capabilities()
-                            }
-                        end
-                    else
-                        require('lspconfig')[server_name].setup {
-                            capabilities = require('cmp_nvim_lsp').default_capabilities()
-                        }
-                    end
-                end,
-            }
+            -- require('mason-lspconfig').setup_handlers {
+            --     function(server_name)
+            --         if server_name == 'ts_ls' then
+            --             if is_node_project() and (not is_deno_project()) then
+            --                 require('lspconfig')[server_name].setup {
+            --                     capabilities = require('cmp_nvim_lsp').default_capabilities()
+            --                 }
+            --             end
+            --         elseif server_name == 'biome' then
+            --             if is_node_project() and (not is_deno_project()) then
+            --                 require('lspconfig')[server_name].setup {
+            --                     capabilities = require('cmp_nvim_lsp').default_capabilities()
+            --                 }
+            --             end
+            --         elseif server_name == 'denols' then
+            --             if not is_node_project() then
+            --                 require('lspconfig')[server_name].setup {
+            --                     capabilities = require('cmp_nvim_lsp').default_capabilities()
+            --                 }
+            --             end
+            --         else
+            --             require('lspconfig')[server_name].setup {
+            --                 capabilities = require('cmp_nvim_lsp').default_capabilities()
+            --             }
+            --         end
+            --     end,
+            -- }
         end,
     },
     {
@@ -568,6 +582,11 @@ let g:sonictemplate_vim_template_dir = '$HOME/.config/nvim/plugins_dein/sonictem
                 }
             }
             -- lspkind end
+            cmp.setup {
+                vim.lsp.config('*', {
+                    capabilities = require('cmp_nvim_lsp').default_capabilities()
+                })
+            }
         end,
     },
 }
