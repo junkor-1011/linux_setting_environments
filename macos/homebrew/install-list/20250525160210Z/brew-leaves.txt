@@ -15,12 +15,15 @@ git-delta
 gitui
 go
 hadolint
+helix
 helm
 htop
 kind
+kustomize
 lazygit
 lefthook
 lsd
+mas
 minikube
 ncdu
 pipx

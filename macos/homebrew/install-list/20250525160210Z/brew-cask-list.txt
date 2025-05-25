@@ -1,6 +1,8 @@
 drawio
 iterm2
 karabiner-elements
+keyclu
+neovide
 openineditor-lite
 openinterminal-lite
 utm
