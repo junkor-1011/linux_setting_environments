@@ -135,6 +135,15 @@ vim.api.nvim_create_autocmd("BufRead", {
     end,
 })
 
+-- diagnostic config
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+})
+
 require("config.lazy")
 
 source_vim_file("~/.config/nvim/myutils/mappings.rc.vim")
