@@ -2,12 +2,12 @@
 set -euo pipefail
 
 # NPM_VERSION="$(curl --silent "https://raw.githubusercontent.com/npm/cli/latest/package.json" | jq .version | sed -e "s/\"//g")"
-PNPM_VERSION="$(curl --silent "https://raw.githubusercontent.com/pnpm/pnpm/refs/heads/main/pnpm/npm/pnpm/package.json" | jq .version | sed -e "s/\"//g")"
+# PNPM_VERSION="$(curl --silent "https://raw.githubusercontent.com/pnpm/pnpm/refs/heads/main/pnpm/npm/pnpm/package.json" | jq .version | sed -e "s/\"//g")"
 
 corepack enable npm pnpm
 # corepack prepare "npm@${NPM_VERSION:-9.6.5}" --activate
 # corepack prepare yarn@1.22.22 --activate
-corepack prepare "pnpm@v${PNPM_VERSION:-11.13.1}" --activate
+# corepack prepare "pnpm@v${PNPM_VERSION:-11.13.1}" --activate
 
 npm install --global \
     tsx \
